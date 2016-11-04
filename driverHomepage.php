@@ -17,7 +17,34 @@
 
     <div class = "mainDriverPage">
       <img class="profileImage" src = "image/default.jpg">
-      <div class="textLabel" id="name">First Name, Last Name</div>
+      <div class="textLabel" id="name">
+	  
+	  <?php
+	  
+	  session_start();
+	  
+	  $mysqli = mysqli_connect("localhost", "root", "password", "letitridesystem");
+	  
+	  /* check connection */
+	  if (mysqli_connect_errno()) {
+	  printf("Connect failed: %s\n", mysqli_connect_error());
+	  exit();
+	  }
+		
+	  $query = "SELECT Name FROM rut WHERE UserID = '{$_SESSION['UserID']}'";
+	  $result = mysqli_query($mysqli, $query);
+	  
+	  if (!$result) {
+		echo "Could not successfully run query ($sql) from DB: " . mysql_error();
+      exit;
+}
+	  
+	  $row = mysqli_fetch_assoc($result);
+	  echo $row['Name'];
+	  
+	  ?>
+	  
+	  </div>
 		  <div class="left_panel" id = "panel1">
 			<div class= "textLabel" id = "button1Label">
 				<button id = "search" class="customer_search button" onclick = "startService()"/>Look for customer</button>
