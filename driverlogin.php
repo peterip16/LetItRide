@@ -34,9 +34,23 @@ $userID = $row[0];
 
 if ($count == 1){      //If the posted values are equal to the database values, then session will be created for the user.
   $row = mysqli_fetch_array($result);
-  echo "$row";
+  //echo "$row";
 $_SESSION['UserID'] = $userID; //saves email IN SESSION
-header( 'Location: additionalinformationpageDriver.html' ) ;
+
+
+$query2 = "SELECT UserID from dit where userID = $userID";
+//echo "42 ";
+$result2 = mysqli_query($mysqli, $query2) or die(mysql_error());
+//echo "44 ";
+$count = mysqli_num_rows($result2);
+//echo "46 ";
+if($count == 0){
+	//echo "48 ";
+	header( 'Location: additionalinformationpageDriver.html' );
+} else {
+	//echo "51 ";
+	header( 'Location: driverhomepage.php' );
+}
 }
 else
 {
