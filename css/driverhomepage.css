@@ -1,0 +1,156 @@
+.profileImage{
+    border-radius: 50%;
+    width: 13%;
+    height: 13%;
+  max-width: 15%;
+  min-width: 15%;
+    position: relative;
+    left: 7%;
+    top: 90px;
+}
+
+#name{
+  word-wrap: break-all;
+  position: absolute;
+  top: 50%;
+  left: 9.5%;
+  max-width: 17%
+}
+
+#map {
+  height: 100%;
+  position: absolute;
+  width: 75%;
+  left: 30%;
+}
+
+.mainPage{
+  height: 100%;
+  position: absolute;
+  width: 25%;
+}
+
+.infoPage{
+  height: 100%;
+  position: absolute;
+  width: 25%;
+}
+
+
+.textLabel {
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: white;
+}
+
+#fromLabel{
+  position: absolute;
+  top: 52%;
+  left: 3%;
+}
+
+#toLabel{
+  position: absolute;
+  top: 60%;
+  left: 3%;
+}
+
+html, body {
+  background: #383944;
+}
+
+
+.controls {
+        
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+      }
+
+
+#to {
+        position: absolute;
+        left: 6%;
+        width: 20%;
+        top: 58%;
+  }
+
+
+
+#to:focus {
+        border-color: #4d90fe;
+      }
+
+#from {
+        
+        position: absolute;
+        left: 6%;
+        width: 20% ; 
+        top: 50%;
+      }
+
+#from:focus {
+        border-color: #4d90fe;
+      }
+
+.button {
+  position: absolute;
+  left: 10%;
+  top: 70%;
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 15px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  background: #1ab188;
+  color: #ffffff;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-appearance: none;
+  border-radius: 15px;
+  word-wrap: break-all;
+  width: 15%;
+}
+
+.button:hover, .button:focus {
+  background: #179b77;
+}
+
+.button-block {
+  display: block;
+  width: 13%;
+}
+
+#search{
+  word-wrap: break-all;
+    left: 8%;
+  top: 70%
+  width: 20%;
+}
+
+#quit{
+  word-wrap: break-all;
+    left: 8%;
+  top: 80%;
+  width: 15%;
+}
+
+
+

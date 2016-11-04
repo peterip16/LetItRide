@@ -1,0 +1,150 @@
+.profileImage{
+    border-radius: 50%;
+    width: 15%;
+    height: 15%;
+    position: relative;
+    left: 7%;
+    top: 90px;
+}
+
+#name{
+  position: absolute;
+  top: 50%;
+  left: 9%;
+}
+
+#map {
+  height: 100%;
+  position: absolute;
+  width: 75%;
+  left: 30%;
+}
+
+.mainPage{
+  height: 100%;
+  position: absolute;
+  width: 25%;
+}
+
+.infoPage{
+  height: 100%;
+  position: absolute;
+  width: 25%;
+}
+
+
+.textLabel {
+  top: 40%
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: white;
+}
+
+#fromLabel{
+  position: absolute;
+  top: 65%;
+  left: 3%;
+}
+
+#toLabel{
+  position: absolute;
+  top: 65%;
+  left: 3%;
+}
+
+html, body {
+  background: #383944;
+}
+
+
+.controls {
+        
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+      }
+
+
+#to {
+        position: absolute;
+        left: 6%;
+        width: 20%;
+        top: 58%;
+  }
+
+
+
+#to:focus {
+        border-color: #4d90fe;
+      }
+
+#from {
+        
+        position: absolute;
+        left: 6%;
+        width: 20% ; 
+        top: 50%;
+      }
+
+#from:focus {
+        border-color: #4d90fe;
+      }
+
+.button {
+
+  position: absolute;
+  left: 10%;
+  top: 65%;
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 15px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  background: #1ab188;
+  color: #ffffff;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-appearance: none;
+  border-radius: 15px;
+  width: 16%
+}
+
+.button:hover, .button:focus {
+  background: #179b77;
+}
+
+.button-block {
+  display: block;
+}
+
+#search{
+    left: 7%;
+	top: 65%
+	width: 20%;
+}
+
+#quit{
+    left: 7%;
+	top: 75%;
+	width: 16%;
+}
+
+
+

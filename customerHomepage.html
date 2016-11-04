@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script> -->
+
+   
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- <script type="text/javascript" src="js/homepage.js"></script>
+    <script src="js/homepage_jQuery.js"></script> -->
+
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script> -->
+
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script> -->
+
+    <!-- Latest compiled and minified CSS -->
+    
+    
+
+    
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script> -->
+
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script> -->
+
+    <!-- Latest compiled and minified CSS -->
+    <script src="js/jQuery.js"></script>
+    
+    <!-- <script type="text/javascript">
+      $.getJSON('getData.php', function(data){
+        $.each(data.result, function(){
+          alert(this['name'] + " " + this['email'] + " " + this['phone']);
+        });
+
+      });
+
+    </script> -->
+    
+    
+    
+    <link rel="stylesheet" href="css/homepage.css">
+
+
+  </head>
+  <body>
+  <div class="se-pre-con"><img src="image/Preloader_3.gif"></div>
+   <div class="container">
+  
+      <div id="map"></div>
+      <button id="trafficToggle" onclick = "toggleTraffic()">Traffic</button>
+
+  
+      <ul class="tabs">
+        <li><a class = "home" href="#homePage""><img src="image/home.png" 
+                        onMouseOver=src="image/home_hover.png"
+                        onMouseOut=src="image/home.png"></a></li>
+        <li><a class = "profile" href="#profilePage"><img src="image/profile.png"
+                        onMouseOver=src="image/profile_hover.png"
+                        onMouseOut=src="image/profile.png"></a></li>
+        <li><a class = "history" href="#historyPage"><img src="image/history.png"
+                        onMouseOver=src="image/history_hover.png"
+                        onMouseOut=src="image/history.png"></a></li>
+      </ul>
+
+
+      <div class = "tab" id = "homePage">
+          <div class="imagePanel">
+            <img class="profileImage" src = "js/getImage.php">
+            <div class="textLabel" id="name">FirstName LastName</div>
+          </div>
+        
+          <div class = "inputPanel">
+            <div class= "textLabel" id = "fromLabel">From: </div> 
+            <input id="from" class="controls" type="text" placeholder="Pick up location">
+            <div class= "textLabel" id = "toLabel">To: </div> 
+            <input id="to" class="controls" type="text" placeholder = "Destination">
+            <label class="switch" id="sclection">
+                <input type="checkbox" id="selected">
+                <div class="switch-btn"></div>
+            </label>
+            <button class="button button-block" id = "myLocation"  onclick="recentering()"/>My location</button>
+            <button class="button button-block" id="requestAride" onclick = "calculateAndDisplayRoute()"/>Request A Ride</button>
+          </div>
+
+        <div class = "directionPanel" >
+          <div class="goBack"><img src="image/leftArrow.png"
+                      onMouseOver=src="image/leftArrow_hover.png"
+                      onMouseOut=src="image/leftArrow.png"></div>
+          <div class="textLabel" id="timeAndDistance"></div>
+          <div id="dirctionDiscription"></div>
+        </div>
+      </div>
+
+        <div class = "tab" id ="profilePage" >
+          <form id = "profileInput" action ="js/submit.php" method = "post" enctype="multipart/form-data">
+          	<div class="form-group" >
+              <input type='file'  id="imgInp" name = "profileImg"onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+    		  <img id="blah" class = "selectImage" src = "js/getImage.php">
+	    		  <div class="upload"> 
+	    		  	<img src="image/upload.png"
+	                      onMouseOver=src="image/upload_hover.png"
+	                      onMouseOut=src="image/upload.png" onclick="document.getElementById('imgInp').click();">
+	               </div>
+            </div>
+
+            <div class="form-group" id = "nme">
+              <label for="usr" class = "textLabel" >Name:</label>
+              <input type="text" class="form-control" name="usr">
+            </div>
+            <div class="form-group" id = "pss">
+              <label for="pwd" class = "textLabel"  >Password:</label>
+              <input type="password" class="form-control" name="pwd">
+            </div>
+
+            <div class="form-group" id = "pss2" >
+              <label for="pwd2" class = "textLabel"  >Confirm Password:</label>
+              <input type="password" class="form-control" name="pwd2">
+            </div>
+
+            <div class="form-group" id= emil>
+              <label for="email" class = "textLabel" >Email:</label>
+              <input type="email" class="form-control" name="email">
+            </div>
+
+            <div class="form-group" id= emil>
+              <label for="phone" class = "textLabel" >Phone:</label>
+              <input type="text" class="form-control" name = "phone">
+            </div>
+
+            <!-- <input type="text" id="inputTell" class="bfh-phone" data-format="(ddd) ddd-dddd"> -->
+            
+
+            <button type="submit" class="button button-block">Submit</button>
+          </form>
+        </div>
+
+        <div class = "tab" id = "historyPage">
+      
+        </div>
+    </div> 
+
+    
+    <script src="js/homepage_jQuery.js"></script>
+    <script type="text/javascript" src="js/homepage.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZH1m8DpmJxoEb-708cFe9u9rBFn_4B9g&libraries=places&callback=initMap"
+         async defer></script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Sign-Up/Login Form</title>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" href="css/normalizelogin.css">
+
+    
+        <link rel="stylesheet" href="css/stylelogin.css">
+
+    
+    
+    
+    
+ 
+
+  <body>
+
+    <div class="form">
+      
+      <ul class="tab-group">
+
+
+      
+      <div class="tab-content">
+        <div id="signup">   
+          <h1>Driver Information</h1>
+          
+          <form method="POST" action="register.php">
+ 
+
+          
+          <div class="field-wrap">
+            <label>
+              Drivers License<span class="req">*</span>
+            </label>
+         <!--   <input type="password"required autocomplete="off"/> !-->
+            <input class="string optional" maxlength="255" id="user-pw" placeholder="Drivers License" type="driverslicense" size="50" name="driverslicense"/>
+          </div>
+
+
+           <div class="field-wrap">
+            <label>
+              License Plate<span class="req">*</span>
+            </label>
+         <!--   <input type="password"required autocomplete="off"/> !-->
+            <input class="string optional" maxlength="255" id="user-pw" placeholder="License Plate" type="licenseplate" size="50" name="licenseplate"/>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Car Model<span class="req">*</span>
+            </label>
+         <!--   <input type="password"required autocomplete="off"/> !-->
+            <input class="string optional" maxlength="255" id="user-pw" placeholder="Car Model" type="carmodel" size="50" name="carmodel"/>
+          </div>
+
+
+          <div class="field-wrap">
+            <label>
+              Routing Number<span class="req">*</span>
+            </label>
+         <!--   <input type="password"required autocomplete="off"/> !-->
+            <input class="string optional" maxlength="255" id="user-pw" placeholder="Routing Number" type="routingnumber" size="50" name="routingnumber"/>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Bank Account Number<span class="req">*</span>
+            </label>
+         <!--   <input type="password"required autocomplete="off"/> !-->
+            <input class="string optional" maxlength="255" id="user-pw" placeholder="Bank Account Number" type="bankaccountnumber" size="50" name="bankaccountnumber"/>
+          </div>
+
+
+
+
+           <button id ="myButton" formaction="additioninformationDriverInput.php" class="button button-block"/>Continue</button>
+          
+          </form>
+
+        </div>
+        
+        <div id="login">   
+          <h1>Welcome Back!</h1>
+          
+          <form method="POST" action="custoemrlogin.php">
+          
+          
+          </form>
+
+
+        
+      </div><!-- tab-content -->
+      
+</div> <!-- /form -->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+        <script src="js/index.js"></script>
+
+    
+    
+  </body>
+</html>
