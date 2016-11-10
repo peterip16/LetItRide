@@ -16,7 +16,7 @@
     <div id="map"></div>
 
     <div class = "mainDriverPage">
-      <img class="profileImage" src = "image/default.jpg">
+      <img class="profileImage" src = "img/default.jpg">
       <div class="textLabel" id="name">
 	  
 	  <?php
