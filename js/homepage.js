@@ -57,7 +57,7 @@ function placePickUpLocationMarker(location){
   pickupLocationMarker = new google.maps.Marker({
       position: location,
       map: map,
-      icon: 'image/green-dot.png',
+      icon: 'img/green-dot.png',
       zIndex: 50
     });
 }
@@ -68,7 +68,7 @@ function placeDestinationMarker(location) {
   desitinationMarker = new google.maps.Marker({
       position: location,
       map: map,
-      icon: 'image/red-dot.png',
+      icon: 'img/red-dot.png',
       zIndex: 50
     });
 }
@@ -344,7 +344,7 @@ function desitination() {
                 position: place.geometry.location,
                 map: map,
                 animation: google.maps.Animation.DROP,
-                icon: 'image/red-dot.png',
+                icon: 'img/red-dot.png',
                 zIndex: 50
               });
 
@@ -420,7 +420,7 @@ function pickupLocation() {
                 position: place.geometry.location,
                 map: map,
                 animation: google.maps.Animation.DROP,
-                icon: 'image/green-dot.png',
+                icon: 'img/green-dot.png',
                 zIndex: 50
               });
               pickupLocationMarkers.push(newMarker);
