@@ -34,11 +34,18 @@ $userID = $row[0];
 
 
 if ($count == 1){      //If the posted values are equal to the database values, then session will be created for the user.
-  $row = mysqli_fetch_array($result);
-  echo "$row";
-$_SESSION['UserID'] = $userID; //saves email IN SESSION
-header( 'Location: additionalinformationpageCustomer.html' ) ;
+$_SESSION['UserID'] = $userID; //saves userID in session
+
+//CHECK IF IT HAS CREDITCARD INFORMATION IN TABLE
+$query = "SELECT * FROM `cit` WHERE UserID = '$userID'";
+$result = mysqli_query($mysqli, $query);
+if (mysqli_num_rows($result) > 0){ 
+      $_SESSION['error'] = "Already exists!";
+    header( "refresh:0; url=customerHomepage.html" );
 }
+else header( 'Location: additionalinformationpageCustomer.html' ) ;
+}
+
 else
 {
   $_SESSION['error'] = "Invalid login credentials";
