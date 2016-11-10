@@ -13,6 +13,50 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['name'])
   $query = "SELECT * FROM `rut` WHERE Email='$email'";
   $result = mysqli_query($mysqli, $query);
   $message = "Successfully Registered!";
+  if (empty($name) AND empty($password) AND empty($email))
+{
+echo "<script type='text/javascript'>alert('Please enter a Name, email and password!')</script>";
+  header( "refresh:0; url=index.html" );
+  exit;
+}
+
+if (empty($name) AND empty($password))
+{
+echo "<script type='text/javascript'>alert('Please enter a Name and password!')</script>";
+  header( "refresh:0; url=index.html" );
+  exit;
+}
+if (empty($name) AND empty($email))
+{
+echo "<script type='text/javascript'>alert('Please enter a Name and email!')</script>";
+  header( "refresh:0; url=index.html" );
+  exit;
+}
+if (empty($email) AND empty($password))
+{
+echo "<script type='text/javascript'>alert('Please enter a Email and password!')</script>";
+  header( "refresh:0; url=index.html" );
+  exit;
+}
+
+if (empty($email))
+{
+   echo "<script type='text/javascript'>alert('Please enter an email!')</script>";
+  header( "refresh:0; url=index.html" );
+  exit;
+}
+if (empty($password))
+{
+   echo "<script type='text/javascript'>alert('Please enter an Password!')</script>";
+  header( "refresh:0; url=index.html" );
+  exit;
+}
+if (empty($name))
+{
+   echo "<script type='text/javascript'>alert('Please enter an Name!')</script>";
+  header( "refresh:0; url=index.html" );
+  exit;
+}
   if (mysqli_num_rows($result) > 0){ 
     $_SESSION['error'] = "User already exists";
     echo "<script type='text/javascript'>alert('Email already Exists!')</script>";
