@@ -130,7 +130,7 @@ function displayDirections(data) {
       //console.log(response.routes[i].summary);
       if(response.routes[i].summary == routename)
       {
-		document.getElementById("firstPanel").style.visibility = "hidden";
+		document.getElementById("firstPanel").style.display = "none";
 		console.log("Panel 1 is hiding\n");
         $('.secondPanel').show();
 		document.getElementById("secondPanel").style.display = "block";
