@@ -1,5 +1,5 @@
 <?php
-$mysqli = mysqli_connect("localhost", "root", "password", "letitridesystem");
+$mysqli = mysqli_connect("localhost", "root", "", "letitridesystem");
 
 /* check connection */
 if (mysqli_connect_errno()) {

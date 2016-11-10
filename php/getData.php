@@ -1,8 +1,13 @@
 <?php
+	session_start();
 	mysql_connect("localhost","root","") or die(mysql_error());
 	mysql_select_db("LetItRideSystem") or die(mysql_error());
 
-	$query = mysql_query("SELECT * FROM rut WHERE UserID = 1");
+	
+
+	$userID = $_SESSION['UserID'];
+
+	$query = mysql_query("SELECT * FROM rut WHERE UserID = '$userID'");
 
 	// $numrows = mysql_num_rows($query);
 
@@ -33,4 +38,9 @@
 	
 	echo json_encode(array("result" => $result));
 	// echo json_encode($result);
+	
+
+	// $random = rand(1,17); 
+	// $random = "image/loader/Preloader_".$random.".gif";
+	// echo $random; 
 ?>

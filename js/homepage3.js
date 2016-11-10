@@ -57,7 +57,7 @@ function placePickUpLocationMarker(location){
   pickupLocationMarker = new google.maps.Marker({
       position: location,
       map: map,
-      icon: 'img/green-dot.png',
+      icon: 'image/green-dot.png',
       zIndex: 50
     });
 }
@@ -68,7 +68,7 @@ function placeDestinationMarker(location) {
   desitinationMarker = new google.maps.Marker({
       position: location,
       map: map,
-      icon: 'img/red-dot.png',
+      icon: 'image/red-dot.png',
       zIndex: 50
     });
 }
@@ -165,25 +165,204 @@ function toggleTraffic(){
     }
 } 
 
+function requestADriver(){
+      // alert("hello");
+
+      // var popUp = document.getElementById("noDriverScreen");
+
+
+      
+      // popUp.style.display("block");
+
+
+      $.getJSON('php/requestDrive.php', function(data){
+
+        // alert(data.result.length);
+      // $.each(data.result, function(){
+      
+      // var driverId;
+      var waitingTime = 999999;
+      var time;
+      var j = 0;
+      var driverIndex;
+      if(data.result.length > 0) {
+        // alert(data.result.length );
+
+        
+        for(i = 0; i < data.result.length; i++){
+          directionsService = new google.maps.DirectionsService;
+          directionsDisplay = new google.maps.DirectionsRenderer;
+          directionsDisplay.setMap(map);
+          // alert(i);
+          directionsService.route({
+            origin: document.getElementById('from').value,
+            destination: data.result[i]['location'],
+            travelMode: 'DRIVING'
+          }, function(response, status) {
+            if (status === 'OK') {
+
+              // directionsDisplay.setDirections(response);
+
+              var route = response.routes[0];
+              var str = route.legs[0].duration.text;
+              // var time = Number(route.legs[0].duration.text);
+
+              time = str.substr(0, str.lastIndexOf("mins") - 1);
+              
+              
+              // alert(data.result[i]['id']);
+                // alert(time);
+                 // alert(waitingTime);
+                if(!isNaN(time)){
+                  time = Number(time);
+                  // alert(waitingTime > time);
+                  if(waitingTime > time){
+                    waitingTime = time;
+                    
+                    driverIndex = j;
+                    // alert(driverId + " " + waitingTime);
+                  }
+                }
+                j++;
+
+                // alert(j);
+                if(driverIndex == null){
+                  displayNoDriver();
+                }
+                if(j == data.result.length){
+                  // alert(data.result[driverIndex]['model']);
+                  var driverId = data.result[driverIndex]['id'];
+
+                  var name = data.result[driverIndex]['name'];
+                  var phone = data.result[driverIndex]['phone'];
+
+                  var license = data.result[driverIndex]['license'];
+                  var plate = data.result[driverIndex]['plate'];
+                  var model = data.result[driverIndex]['model'];
+                  // alert(data.result[driverIndex]['id']);
+                  // alert(waitingTime);
+                  foundDriver(driverId, name, phone, license, plate, model, waitingTime);
+                }
+                
+
+              }
+              
+              // alert(disNaN(time));
+              // alert(driverId + " " + waitingTime);
+              
+
+
+            });
+
+          
+          // alert(time);
+          
+          // alert(driverId + " " + waitingTime);
+        }
+
+        // alert(driverId + " " + waitingTime);
+        // if(waitingTime > 30){
+        //   displayNoDriver();
+        // }else{
+        //   alert(driverId + " " + waitingTime);
+        // }
+        
+
+
+      }
+     else{
+        displayNoDriver();
+     }
+
+     // alert(j);
+
+    });
+
+    // alert(j);
+
+}
+
+function foundDriver(id, name, phone, license, plate, model, time){
+  // alert(time > 30);
+  // alert(id + " " + name  + " " + phone + " " + license + " " + plate + " " + model  + " " + time);
+  // alert(time);
+  if(time > 30){
+          displayNoDriver();
+  }else{
+    // alert(id.substr(62));
+    // for(i = 0; i < id.length; i++){
+    //   alert(id.charAt(i) != 0);
+    //   if(id.charAt(i) != 0){
+    //     id.substr(i);
+    //     break;
+    //   }
+    // }
+    // alert(id + " " + name  + " " + phone + " " + license + " " + plate + " " + model  + " " + time);
+    id = id.substr(60);
+    var nm = $('#diverName');
+    var did = $('#drivId');
+    var carModel = $('#model');
+    var lic = $('#license');
+    var pl = $('#plate');
+    var ph = $('#phone');
+    var waitingTime = $('#waitingTime');
+
+    nm.html(name);
+    did.html("Driver ID: "+ "\t" +id);
+    carModel.html("Car model: " +"\t" +model);
+    lic.html("Driver license: " + "\t" +license);
+    pl.html("Plate number: " + "\t" +plate);
+    ph.html("Contact phone number: " + "\t" +phone);
+    waitingTime.html("Eastimated waiting time:" + "\t" + time + " mins");
+
+     // $(name).appendTo(nm);
+     // nm.append(name);
+
+    var popUp = $('#requestDriverScreen');
+    popUp.show();
+  }
+}
+
+function closeRequestDriver(){
+  var popUp = $('#requestDriverScreen');
+  popUp.hide();
+  calculateAndDisplayRoute();
+}
+
+function displayNoDriver(){
+  var popUp = $('#noDriverScreen');
+  popUp.show();
+}
+
+function closeNoDriver(){
+  var popUp = $('#noDriverScreen');
+  popUp.hide();
+}
+
 function calculateAndDisplayRoute(){
+
+  // if(directionsDisplay){
+  //     directionsDisplay.setMap(null);
+  // }
+  // directionsDisplay.setMap(map);
+  // directionsService = new google.maps.DirectionsService;
+  // directionsDisplay = new google.maps.DirectionsRenderer;
+  // if(directionsDisplay){
+  //     directionsDisplay.setMap(null);
+  // }
+  // directionsDisplay.setMap(map);
+
+
   $('#dirctionDiscription').empty();
   directionsDisplay.setPanel(document.getElementById('dirctionDiscription'));
   getTrafficPath(); //CALCULATE AND DISPLAYS PATH
-  console.log("Service Started");
+  //storeLongLat(); //STORE USER's PICKUP LOCATION + DESTINATION
   timer = setTimeout(startService(), interval);
   clearPickUpLocationMarkers(); 
   clearDestinationMarkers();     
 
 }
 
-function serviceCalculateRoute()
-{
-  $('#dirctionDiscription').empty();
-  directionsDisplay.setPanel(document.getElementById('dirctionDiscription'));
-  getTrafficPath(); //CALCULATE AND DISPLAYS PATH
-  clearPickUpLocationMarkers(); 
-  clearDestinationMarkers();   
-}
 function getTrafficPath() {  
   //console.log(toAddress);
   //console.log(fromAddress);       
@@ -344,7 +523,7 @@ function desitination() {
                 position: place.geometry.location,
                 map: map,
                 animation: google.maps.Animation.DROP,
-                icon: 'img/red-dot.png',
+                icon: 'image/red-dot.png',
                 zIndex: 50
               });
 
@@ -420,7 +599,7 @@ function pickupLocation() {
                 position: place.geometry.location,
                 map: map,
                 animation: google.maps.Animation.DROP,
-                icon: 'img/green-dot.png',
+                icon: 'image/green-dot.png',
                 zIndex: 50
               });
               pickupLocationMarkers.push(newMarker);
@@ -466,12 +645,11 @@ function storeLongLat()
         data: {toLng: toLng, toLat: toLat, toAddress: toAddress,
                fromLng: fromLng, fromLat: fromLat, fromAddress: fromAddress},
         success: function(data){
-            //console.log("test: "+data);
+            console.log("test: "+data);
         }
     });   
 }
 
-//START SERVICE FOR CUSTOMER
 function startService() {
   if(serviceStatus == false) {
     serviceStatus = true;
@@ -481,10 +659,11 @@ function startService() {
       data: {fromAddress: fromAddress, fromLat: fromLat, fromLng: fromLng,toAddress: toAddress, toLat: toLat, toLng: toLng},
       success: function(data){
         if(data != false) {
-        	console.log("Driver Found");
+            //console.log(data);
+
             clearTimeout(timer);
             timer = 0;
-            
+            console.log("System has matched a driver");
             driverData = jQuery.parseJSON(data); 
             //console.log(driverData);
             driverID = driverData.driverID;
@@ -496,45 +675,76 @@ function startService() {
             toAddress = fromAddress;
             fromAddress = driverAddress;
             //console.log(destinationAddress);
-
-            timer =setTimeout(waitForDriver(), interval); //Begin waiting for driver
+            calculateAndDisplayRoute();
+            timer =setTimeout(waitForDriver(), interval); //begin searching for customer
         }
         else {
           clearTimeout(timer);
           timer = 0;
           serviceStatus = false;
           console.log("Finding Driver");
-          timer = setTimeout(startService(), interval); //Else continue finding a driver
+          timer = setTimeout(startService(), interval);
         }
       }
     });
     
   }
 }
+function getDriver() {  
+  clearTimeout(timer);  
+    $.ajax({
+      url: "php/getDriver.php", 
+      method: "post",
+      data: {fromLat:fromLat, fromLng:fromLng, fromAddress: fromAddress},
+      success: function(data){
+          if(data == false){
+            timer = setTimeout(getDriver(), interval);
+          }
+          else {
+            clearTimeout(timer);
+            timer = 0;
+            
+            driverData = data;
+
+            driverID = data.driverID[0];
+            driverLng = data.driverLng[0];
+            driverLat = data.driverLat[0];
+            driverAddress = data.driverAddress[0];
+            destinationAddress = toAddress;
+            toAddress = fromAddress;
+            fromAddress = driverAddress;
+            updateCheck = 0;
+            //calculateAndDisplayRoute();
+            setTimeout(waitForDriver(), interval);
+          }
+      }
+    });
+}
 
 function waitForDriver() {
+console.log("waiting for driver");
    $.ajax({
       url: "php/waitForDriver.php", 
       method: "post",
       data: {driverID: driverID},
       success: function(data){
           if(data != true){
-          	clearTimeout(timer);
-          	//console.log(data);
+          	 clearTimeout(timer);
+          	console.log(data);
             timer = setTimeout(waitForDriver(), interval);
-            console.log("waiting");
+            console.log("waiting for driver");
             if(updateCheck < 1){
 				//console.log(fromAddress + " " + toAddress);
-				serviceCalculateRoute();
-				updateCheck++;
-			}
+      				calculateAndDisplayRoute();
+      				updateCheck++;
+      			}
             //later will track driver location and update marker
           }
           else {
             console.log("Driver is here");
             navigator.geolocation.getCurrentPosition(setUserCurrentLocation);
             toAddress = destinationAddress;
-            serviceCalculateRoute();
+            calculateAndDisplayRoute();
           }
       }
 });

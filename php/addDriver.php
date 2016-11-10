@@ -18,6 +18,7 @@ if (isset($_POST)) {
 		$query = "INSERT INTO `rdydriv` (DrivID,DrivLocat,lat,lng) values ('$userID','$address', '$lat', '$lng')";
 		$result = mysqli_query($mysqli, $query) or die(mysql_error());
 		if ($result){
+			sleep(5);
 			echo "Service started";
 		}
 	}

@@ -21,7 +21,7 @@ else {
 		//$result = mysqli_query($mysqli, $query) or die(mysql_error());
 
 		//get customer ID
-		$query = "SELECT CustID, destin, destiLat, destiLng, custAddr, custLat, custLng FROM `trans` WHERE DrivID='$userID' AND State != 'b'";
+		$query = "SELECT * FROM `trans` WHERE DrivID='$userID' AND State != 'b'";
         //echo $query;
 		$result = mysqli_query($mysqli, $query) or die(mysql_error());
 		while($row = $result->fetch_assoc()) {
@@ -31,7 +31,7 @@ else {
             //echo $destination;
         	$destinationLat = $row["destiLat"];
             //echo $destinationLat;
-        	$destinationLng = $row["destiLng"];
+        	$destinationLng = $row["destiLat"];
             //echo $destinationLng;
         	$customerAddress = $row["custAddr"];
             //echo $customerAddress;
@@ -61,7 +61,7 @@ else {
     	// $data['customerLat'] = array($customerLat);
     	// $data['customerLng'] = array($customerLng);
 
-        $data = [ 'name' => $customerName, 'customerID' => $customerID, 'destinationAddress' => $destination, 'destinationLat' => $destinationLat, 'destinationLng' => $destinationLng,'customerAddress'=> $customerAddress,'customerLat'=> $customerLat, 'customerLng' => $customerLng ];
+        $data = [ 'name' => $customerName, 'customerID' => $customerID, 'destinationAddress' => $destination, 'destinationLat' => $destinationLat, 'destinationLng' => $destinationLng,'customerAddress'=> $customerAddress,'customerLat'=> $destinationLng, 'customerLng' => $customerLng ];
         sleep(5);
     	echo json_encode($data);
 }

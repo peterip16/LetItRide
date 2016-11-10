@@ -48,7 +48,6 @@ function initMap(location) {
 }
 
 function calculateAndDisplayRoute(){
-	console.log("calculating route");
   getTrafficPath(); //CALCULATE AND DISPLAYS PATH
   //storeLongLat(); //STORE USER's PICKUP LOCATION + DESTINATION
   //clearPickUpLocationMarkers(); 
@@ -87,7 +86,6 @@ function getTrafficPath() {
 }
 
 function displayDirections(data) {
-	console.log("Displaying directions\n");
   var i = data.routes.length;
   //console.log("# of routes: " +i);
   var fastestIndex = 0;
@@ -110,9 +108,6 @@ function displayDirections(data) {
   var routename = data.routes[fastestIndex].summary; //USED CURRENTLY FOR COMPARE
   //console.log(routename);
   var date =  new Date();
-  
-  console.log("Testing\n");
-  
   //DRAW ROUTE, MATCH BY ROUTE SUMMARY
   directionsService.route({
     origin: fromAddress,
@@ -130,11 +125,8 @@ function displayDirections(data) {
       //console.log(response.routes[i].summary);
       if(response.routes[i].summary == routename)
       {
-		document.getElementById("firstPanel").style.display = "none";
-		console.log("Panel 1 is hiding\n");
-        $('.secondPanel').show();
-		document.getElementById("secondPanel").style.display = "block";
-		console.log("Panel 2 should be showing.\n");
+      	//$('.inputPanel').hide();
+        //$('.directionPanel').show();
         directionsDisplay.setDirections(response);
         directionsDisplay.setRouteIndex(i);
         directionsDisplay.setMap(map);
@@ -145,7 +137,7 @@ function displayDirections(data) {
 }
 
 function startService() {
-  navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
+  //navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
   if(serviceStatus == false) {
     serviceStatus = true;
     $.ajax({
@@ -159,8 +151,9 @@ function startService() {
 	        timer = setTimeout(getCustomer(), interval); //begin searching for customer
       	}
       	else {
+          console.log('error');
       		console.log(data);
-      	}
+      	}1
       }
     });
     
@@ -176,7 +169,7 @@ function getCustomer() {
           if(data == false){
             clearTimeout(timer);
             timer = 0;
-            console.log("Finding Customer");
+            console.log("Finding customer");
             timer = setTimeout(getCustomer(), interval);
           }
           else {
@@ -196,11 +189,10 @@ function getCustomer() {
             destinationLat = customerData.destinationLat;
             destinationAddress = customerData.destinationAddress;
 
-            navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
+            //navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
             fromAddress = driverAddress;
 
             calculateAndDisplayRoute();
-            console.log("Getting to customer");
             timer = setTimeout(getToCustomer(), interval);
           }
       }
@@ -213,11 +205,10 @@ function getToCustomer() {
     $.ajax({
       url: "php/getToCustomer.php", 
       method: "post",
-      data: {customerID: customerID, driverLng: driverLng, driverLat: driverLat, driverAddress: driverAddress, customerLat: customerLat, customerLng : customerLng, custAddress: customerAddress},
+      data: {customerID: customerID},
       success: function(data) {
-          if(data != true){
+          if(data == false){
             console.log("Getting to customer");
-            console.log(data);
             clearTimeout(timer);
             timer = 0;
             timer = setTimeout(getToCustomer(), interval);
@@ -225,8 +216,10 @@ function getToCustomer() {
           else {
             clearTimeout(timer);
             timer = 0;
+            console.log(data);
             fromAddress = driverAddress;
             toAddress = destinationAddress;
+            console.log("Driving to destination");
             calculateAndDisplayRoute();
           }
       }

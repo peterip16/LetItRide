@@ -26,7 +26,6 @@ else {
 	    $DriverLocation = $row["DrivLocat"];
 	    $DriverLat = $row["lat"];
 	    $DriverLng= $row["lng"];
-	    $Distance = $row["distance"];
 	}
 
 	$query = "SELECT * FROM `trans` WHERE CustID='$userID' AND State != 'b'";
@@ -44,11 +43,13 @@ else {
 		    	while($row = $result->fetch_assoc()) {
 		        	$driverName = $row["Name"];
 			}
-
-			$query = "DELETE FROM `rdyDriv` WHERE DrivID='$DriverID'";
-			$result = mysqli_query($mysqli, $query) or die(mysql_error());
-			
-		    $data = [ 'name' => $driverName, 'driverID' => $DriverID, 'driverAddress' => $DriverLocation, 'driverLat' => $DriverLat, 'driverLng' => $DriverLng, 'distance' => $Distance];
+			// $data = array();
+	  //   	$data['name'] = array($driverName);
+	  //   	$data['driverID'] = array($DriverID);
+	  //   	$data['driverAddress'] = array($DriverLocation);
+	  //   	$data['driverLat'] = array($DriverLat);
+	  //   	$data['driverLng'] = array($DriverLng);	
+		    $data = [ 'name' => $driverName, 'driverID' => $DriverID, 'driverAddress' => $DriverLocation, 'driverLat' => $DriverLat, 'driverLng' => $DriverLng ];
 		    sleep(5);
 	    	echo json_encode($data);
     	}

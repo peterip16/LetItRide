@@ -7,7 +7,7 @@
 
 
 <?php  session_start();
-require('php\connection.php');
+require('connection.php');
 
 if (isset($_POST['email']) and isset($_POST['password'])){
 
@@ -49,7 +49,7 @@ if($count == 0){
 	header( 'Location: additionalinformationpageDriver.html' );
 } else {
 	//echo "51 ";
-	header( 'Location: driverhomepage.php' );
+	header( 'Location: ../driverhomepage.php' );
 }
 }
 else
