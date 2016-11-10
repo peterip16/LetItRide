@@ -76,7 +76,7 @@ function getTrafficPath() {
       url:newUrl
     },
     success: function (result) {
-      //console.log(JSON.parse(result));
+      console.log(JSON.parse(result));
       displayDirections(JSON.parse(result));
     },
     error: function (xhr, ajaxOptions, thrownError) {
@@ -87,12 +87,12 @@ function getTrafficPath() {
 
 function displayDirections(data) {
   var i = data.routes.length;
-  //console.log("# of routes: " +i);
+  console.log("# of routes: " +i);
   var fastestIndex = 0;
   var fastestPath = data.routes[i-1].legs[0].duration_in_traffic.value;
   //FIND FASTEST ROUTE
   while(i--) {
-    //console.log("route "+i +": "+data.routes[i].legs[0].duration_in_traffic.value+"seconds");
+    console.log("route "+i +": "+data.routes[i].legs[0].duration_in_traffic.value+"seconds");
     if(data.routes[i].legs[0].duration_in_traffic.value < fastestPath) {
       fastestIndex = i;
       fastestPath = data.routes[i].legs[0].duration_in_traffic.value;
@@ -122,7 +122,7 @@ function displayDirections(data) {
     var i;
     for(i = 0; i < response.routes.length; i++)
     {
-      //console.log(response.routes[i].summary);
+      console.log(response.routes[i].summary);
       if(response.routes[i].summary == routename)
       {
       	//$('.inputPanel').hide();
@@ -137,7 +137,7 @@ function displayDirections(data) {
 }
 
 function startService() {
-  //navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
+  navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
   if(serviceStatus == false) {
     serviceStatus = true;
     $.ajax({
@@ -151,9 +151,8 @@ function startService() {
 	        timer = setTimeout(getCustomer(), interval); //begin searching for customer
       	}
       	else {
-          console.log('error');
       		console.log(data);
-      	}1
+      	}
       }
     });
     
@@ -169,7 +168,7 @@ function getCustomer() {
           if(data == false){
             clearTimeout(timer);
             timer = 0;
-            console.log("Finding customer");
+            console.log("finding customer");
             timer = setTimeout(getCustomer(), interval);
           }
           else {
@@ -177,7 +176,7 @@ function getCustomer() {
             timer = 0;
             console.log("Customer found");
             customerData = jQuery.parseJSON(data); 
-            //console.log(data);
+            console.log(data);
             customerID = customerData.customerID;
             customerName = customerData.name;
             customerLng = customerData.customerLng;
@@ -189,7 +188,7 @@ function getCustomer() {
             destinationLat = customerData.destinationLat;
             destinationAddress = customerData.destinationAddress;
 
-            //navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
+            navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
             fromAddress = driverAddress;
 
             calculateAndDisplayRoute();
@@ -205,7 +204,7 @@ function getToCustomer() {
     $.ajax({
       url: "php/getToCustomer.php", 
       method: "post",
-      data: {customerID: customerID},
+      data: {customerID: customerID, driverLng: driverLng, driverLat: driverLat, driverAddress: driverAddress, custLat: customerLat, custLng : customerLng, custAddress: customerAddress},
       success: function(data) {
           if(data == false){
             console.log("Getting to customer");
@@ -219,7 +218,6 @@ function getToCustomer() {
             console.log(data);
             fromAddress = driverAddress;
             toAddress = destinationAddress;
-            console.log("Driving to destination");
             calculateAndDisplayRoute();
           }
       }

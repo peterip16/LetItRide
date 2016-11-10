@@ -181,8 +181,8 @@ function calculateAndDisplayRoute(){
 }
 
 function getTrafficPath() {  
-  //console.log(toAddress);
-  //console.log(fromAddress);       
+  console.log(toAddress);
+  console.log(fromAddress);       
   var temptoAddress = toAddress;
   temptoAddress = temptoAddress.replace(/,/g,"");
   temptoAddress = temptoAddress.replace(/ /g,"+");
@@ -213,12 +213,12 @@ function getTrafficPath() {
 
 function displayDirections(data) {
   var i = data.routes.length;
-  //console.log("# of routes: " +i);
+  console.log("# of routes: " +i);
   var fastestIndex = 0;
   var fastestPath = data.routes[i-1].legs[0].duration_in_traffic.value;
   //FIND FASTEST ROUTE
   while(i--) {
-    //console.log("route "+i +": "+data.routes[i].legs[0].duration_in_traffic.value+"seconds");
+    console.log("route "+i +": "+data.routes[i].legs[0].duration_in_traffic.value+"seconds");
     if(data.routes[i].legs[0].duration_in_traffic.value < fastestPath) {
       fastestIndex = i;
       fastestPath = data.routes[i].legs[0].duration_in_traffic.value;
@@ -232,7 +232,7 @@ function displayDirections(data) {
   displayTimeDistance.innerHTML = "";
   displayTimeDistance.innerHTML += "Distance: " + distance + "mi Duration: about" + duration +" minutes"
   var routename = data.routes[fastestIndex].summary; //USED CURRENTLY FOR COMPARE
-  //console.log(routename);
+  console.log(routename);
   var date =  new Date();
   //DRAW ROUTE, MATCH BY ROUTE SUMMARY
   directionsService.route({
@@ -248,7 +248,7 @@ function displayDirections(data) {
     var i;
     for(i = 0; i < response.routes.length; i++)
     {
-      //console.log(response.routes[i].summary);
+      console.log(response.routes[i].summary);
       if(response.routes[i].summary == routename)
       {
       	$('.inputPanel').hide();
@@ -311,7 +311,7 @@ function desitination() {
         // more details for that place.
         searchBox.addListener('places_changed', function() {
           var places = searchBox.getPlaces();
-          //console.log(places);
+          console.log(places);
           clearDestinationMarkers();
           if (places.length == 0) {
             return;
@@ -320,13 +320,13 @@ function desitination() {
           	toAddress = places[0].formatted_address;
           	toLng = places[0].geometry.location.lng();
             toLat = places[0].geometry.location.lat();
-            //console.log(toLng+" "+toLat+" "+toAddress);
+            console.log(toLng+" "+toLat+" "+toAddress);
           }
           else {
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
           var i = 1;
-          //console.log(places.length);
+          console.log(places.length);
 
           places.forEach(function(place) {
             if (!place.geometry) {
@@ -397,7 +397,7 @@ function pickupLocation() {
           	fromAddress = places[0].formatted_address;
           	fromLng = places[0].geometry.location.lng();
             fromLat = places[0].geometry.location.lat();
-            //console.log(fromLng+" "+fromLat+" "+fromAddress);
+            console.log(fromLng+" "+fromLat+" "+fromAddress);
           }
           //selectLoction.setMap(null);
           
@@ -480,19 +480,19 @@ function startService() {
 
             clearTimeout(timer);
             timer = 0;
-            console.log("System has matched a driver");
+            
             driverData = jQuery.parseJSON(data); 
             //console.log(driverData);
             driverID = driverData.driverID;
-            //console.log(driverID);
+            console.log(driverID);
             driverLng = driverData.driverLng;
             driverLat = driverData.driverLat;
             driverAddress = driverData.driverAddress;
             destinationAddress = toAddress;
             toAddress = fromAddress;
             fromAddress = driverAddress;
-            //console.log(destinationAddress);
-            calculateAndDisplayRoute();
+            console.log(destinationAddress);
+
             timer =setTimeout(waitForDriver(), interval); //begin searching for customer
         }
         else {
@@ -539,7 +539,7 @@ function getDriver() {
 }
 
 function waitForDriver() {
-console.log("waiting for driver");
+navigator.geolocation.getCurrentPosition(setUserCurrentLocation);
    $.ajax({
       url: "php/waitForDriver.php", 
       method: "post",
@@ -549,12 +549,12 @@ console.log("waiting for driver");
           	 clearTimeout(timer);
           	console.log(data);
             timer = setTimeout(waitForDriver(), interval);
-            console.log("waiting for driver");
+            console.log("waiting");
             if(updateCheck < 1){
 				//console.log(fromAddress + " " + toAddress);
-      				calculateAndDisplayRoute();
-      				updateCheck++;
-      			}
+				calculateAndDisplayRoute();
+				updateCheck++;
+			}
             //later will track driver location and update marker
           }
           else {
