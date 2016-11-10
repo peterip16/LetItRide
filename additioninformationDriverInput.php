@@ -49,7 +49,7 @@ if(empty($driverslicense))
 }
 else
 {
-  $driverslicense = "";
+  $driverslicense1 = "";
 }
 if(empty($licenseplate))
 {
@@ -57,7 +57,7 @@ if(empty($licenseplate))
 }
 else
 {
-  $licenseplate = "";
+  $licenseplate1 = "";
 }
 if(empty($carmodel))
 {
@@ -65,7 +65,7 @@ if(empty($carmodel))
 }
 else
 {
-  $carmodel = "";
+  $carmodel1 = "";
 }
 if(empty($routingnumber))
 {
@@ -73,7 +73,7 @@ if(empty($routingnumber))
 }
 else
 {
-  $routingnumber = "";
+  $routingnumber1 = "";
 }
 if(empty($bankaccountnumber))
 {
@@ -81,7 +81,7 @@ if(empty($bankaccountnumber))
 }
 else
 {
-  $bankaccountnumber = "";
+  $bankaccountnumber1 = "";
 }
 echo "<script type='text/javascript'>alert('Please enter your $driverslicense1  $licenseplate1  $carmodel1  $routingnumber1  $bankaccountnumber1!')</script>";
   header( "refresh:0; url=additionalinformationpageDriver.html" );
