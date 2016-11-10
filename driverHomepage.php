@@ -23,6 +23,8 @@
       <img class="profileImage" src = "img/default.jpg">
       <div class="textLabel" id="name">
 	  
+	  <center>
+	  
 	  <?php
 	  
 	  session_start();
@@ -48,24 +50,43 @@
 	  
 	  ?>
 	  
+	  </center>
+	  
 	  </div>
-		  <div class="left_panel" id = "panel1">
+		  <div class="left_panel" id = "firstPanel">
 			<div class= "textLabel" id = "button1Label">
 				<button id = "search" class="customer_search button" onclick = "startService()"/>Look for customer</button>
 			</div>
 			<div class="left_panel" id = "panel2">
 				<div class= "textLabel" id = "button2Label">
-					<button id = "quit" class="quit button"/>Quit</button>
+					<button id = "quit" class="quit button"/>Change Role</button>
+				</div>
+				<div>
+				<button class="button" id = "sign_out"/>Sign Out</button>
 				</div>
 			</div>
 		  </div>
-		  <div class="secondPanel">
+		  <div class="left_Panel" id = "secondPanel">
 			<div class= "textLabel" id = "button3Label">
-				<button id = "search" class="customer_search button" onclick = "startService()"/>Confirm Picked Up</button>
+				<button id = "search" class="customer_search button"/>Confirm Picked Up</button>
 			</div>
 			<div class= "textLabel" id = "button4Label">
-				<button id = "quit" class="quit button 2"/>Quit</button>
+				<button id = "cancel" class="quit button"/>Cancel</button>
 			</div>
+			<div>
+				<button class="button" id = "sign_out"/>Sign Out</button>
+			</div>
+		  </div>
+		  <div class="left_Panel" id = "thirdPanel">
+			<div class= "textLabel" id = "button5Label">
+				<button id = "search" class="customer_search button"/>Confirm Ride Finish</button>
+			</div>
+			<div class= "textLabel" id = "button6Label">
+				<button id = "cancel2" class="quit button"/>Cancel</button>
+			</div>
+			<div>
+				<button class="button" id = "sign_out"/>Sign Out</button>
+				</div>
 		  </div>
       </div>
     </div>

@@ -48,6 +48,7 @@ function initMap(location) {
 }
 
 function calculateAndDisplayRoute(){
+	console.log("calculating route");
   getTrafficPath(); //CALCULATE AND DISPLAYS PATH
   //storeLongLat(); //STORE USER's PICKUP LOCATION + DESTINATION
   //clearPickUpLocationMarkers(); 
@@ -86,6 +87,7 @@ function getTrafficPath() {
 }
 
 function displayDirections(data) {
+	console.log("Displaying directions\n");
   var i = data.routes.length;
   //console.log("# of routes: " +i);
   var fastestIndex = 0;
@@ -108,6 +110,9 @@ function displayDirections(data) {
   var routename = data.routes[fastestIndex].summary; //USED CURRENTLY FOR COMPARE
   //console.log(routename);
   var date =  new Date();
+  
+  console.log("Testing\n");
+  
   //DRAW ROUTE, MATCH BY ROUTE SUMMARY
   directionsService.route({
     origin: fromAddress,
@@ -125,8 +130,11 @@ function displayDirections(data) {
       //console.log(response.routes[i].summary);
       if(response.routes[i].summary == routename)
       {
-      	$('.panel1').hide();
+		document.getElementById("firstPanel").style.visibility = "hidden";
+		console.log("Panel 1 is hiding\n");
         $('.secondPanel').show();
+		document.getElementById("secondPanel").style.display = "block";
+		console.log("Panel 2 should be showing.\n");
         directionsDisplay.setDirections(response);
         directionsDisplay.setRouteIndex(i);
         directionsDisplay.setMap(map);

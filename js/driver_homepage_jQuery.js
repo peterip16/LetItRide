@@ -14,7 +14,7 @@ var phone = $('input[name = "phone"]');
 
 $(document).ready(function() {
 		// Animate loader off screen
-		$('.se-pre-con').fadeOut(3000);
+		$('.se-pre-con').fadeOut(3500);
 		/*
 		// $(".se-pre-con").hide();
 		$.getJSON('js/getData.php', function(data){

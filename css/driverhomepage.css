@@ -13,7 +13,7 @@
   word-wrap: break-all;
   position: absolute;
   top: 50%;
-  left: 9.5%;
+  left: 12%;
   max-width: 17%
 }
 
@@ -145,6 +145,27 @@ html, body {
   width: 20%;
 }
 
+#confirm{
+  word-wrap: break-all;
+    left: 8%;
+  top: 70%
+  width: 20%;
+}
+
+#finish{
+  word-wrap: break-all;
+    left: 8%;
+  top: 70%
+  width: 20%;
+}
+
+#cancel{
+  word-wrap: break-all;
+    left: 8%;
+  top: 80%;
+  width: 15%;
+}
+
 #quit{
   word-wrap: break-all;
     left: 8%;
@@ -152,8 +173,19 @@ html, body {
   width: 15%;
 }
 
-.secondPanel{
-	display: None;
+#signout{
+  word-wrap: break-all;
+  left: 8%;
+  top: 70%
+  width: 20%;
+}
+
+#secondPanel{
+	display: none;
+}
+
+#thirdPanel{
+	display: none;
 }
 
 /*.no-js #loader { display: none;  }
@@ -177,6 +209,11 @@ html, body {
   left: 50%;
   margin-left: -64px;
 
+}
+
+#sign_out{
+	top: 90%;
+	left: 8%;
 }
 
 
