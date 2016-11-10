@@ -55,7 +55,7 @@
 				</div>
 			</div>
 		  </div>
-		  <div class="left_panel" id = "panel3">
+		  <div class="secondPanel">
 			<div class= "textLabel" id = "button3Label">
 				<button id = "search" class="customer_search button" onclick = "startService()"/>Confirm Picked Up</button>
 			</div>
