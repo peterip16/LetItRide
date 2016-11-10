@@ -8,11 +8,15 @@
 
     <link rel="stylesheet" href="css/driverhomepage.css">
     
+	<script src="js/jQuery.js"></script>
+	<script src="js/driver_homepage_jQuery.js"></script>
     <script type="text/javascript" src="js/driverhomepage.js"></script>
     
 
   </head>
   <body>
+    <div class="se-pre-con"><img src="img/Preloader_3.gif"></div>
+	
     <div id="map"></div>
 
     <div class = "mainDriverPage">
@@ -65,8 +69,6 @@
 		  </div>
       </div>
     </div>
-
-
     
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZH1m8DpmJxoEb-708cFe9u9rBFn_4B9g&libraries=places&callback=initMap"

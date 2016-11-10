@@ -12,4 +12,3 @@ sign it, whether the additional info is already in it
 
 11/9/2016:
 - Includes SQL script to create columns in trans table for confirming driver picked up customer
-- Made sure when the customer and driver are paired up, the row from rdyDriv is removed
