@@ -43,6 +43,7 @@ $a = true;
 
 if($a)
 {
+
 if(empty($driverslicense))
 {
   $driverslicense1 = "driverslicense";
@@ -83,22 +84,38 @@ else
 {
   $bankaccountnumber1 = "";
 }
+
+
+if(($driverslicense1 != "") OR  ($licenseplate1 != "") OR  ($carmodel1 != "") OR ($routingnumber1 != "") OR ($bankaccountnumber1 != ""))
+{
 echo "<script type='text/javascript'>alert('Please enter your $driverslicense1  $licenseplate1  $carmodel1  $routingnumber1  $bankaccountnumber1!')</script>";
   header( "refresh:0; url=additionalinformationpageDriver.html" );
   exit;
+}
+
+}
+
+/*if(($licenseplate1 = "licenseplate") ||  ($carmodel1 = "carmodel") || ($routingnumber1 = "routingnumber") || ($bankaccountnumber1 = "bankaccountnumber") || ($driverslicense1 = "driverslicense"))
+{
+echo "<script type='text/javascript'>alert('Please enter your $driverslicense1  $licenseplate1  $carmodel1  $routingnumber1  $bankaccountnumber1!')</script>";
+  header( "refresh:0; url=additionalinformationpageDriver.html" );
+  exit;
+}
 
 }
 
 
+*/
 
 
 
 
 
 
-//$query = "SELECT * FROM dit WHERE Driverlicense = '$driverslicense' and Licenseplate='$licenseplate' and Carmodel = '$carmodel' and Routingnumber = '$routingnumber' and Bankaccountnumber = '$bankaccountnumber'"; //Checking the values are existing in the database or not
 
-$query = "SELECT * FROM dit where userID = '$userID'";
+
+$query = "SELECT * FROM dit WHERE Driverlicense = '$driverslicense' and Licenseplate='$licenseplate' and Carmodel = '$carmodel' and Routingnumber = '$routingnumber' and Bankaccountnumber = '$bankaccountnumber'"; //Checking the values are existing in the database or not
+//$query = "SELECT * FROM dit where userID = '$userID'";
 $result = mysqli_query($con, $query);
 
 echo "Query ";
