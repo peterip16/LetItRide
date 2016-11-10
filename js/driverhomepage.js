@@ -125,8 +125,8 @@ function displayDirections(data) {
       //console.log(response.routes[i].summary);
       if(response.routes[i].summary == routename)
       {
-      	//$('.inputPanel').hide();
-        //$('.directionPanel').show();
+      	$('.panel1').hide();
+        $('.panel3').show();
         directionsDisplay.setDirections(response);
         directionsDisplay.setRouteIndex(i);
         directionsDisplay.setMap(map);
