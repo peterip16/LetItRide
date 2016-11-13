@@ -46,7 +46,7 @@
 
 
   </head>
-  <body>
+  <body onload="initMap()">
   <div class="se-pre-con"><img src="img/Preloader_3.gif"></div>
    <div class="container">
   
@@ -143,13 +143,12 @@
         </div>
     </div> 
 
-    
     <script src="js/homepage_jQuery.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZH1m8DpmJxoEb-708cFe9u9rBFn_4B9g&libraries=places,geometry,drawing&callback=initMap" async></script>
+    <script src="http://www.geocodezip.com/scripts/v3_epoly.js" async></script>
     <script type="text/javascript" src="js/homepage.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZH1m8DpmJxoEb-708cFe9u9rBFn_4B9g&libraries=places&callback=initMap"
-         async defer></script>
 
-
+    
 
   </body>
 </html>
