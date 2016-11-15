@@ -62,7 +62,7 @@
 					<button id = "quit" class="quit button"/>Change Role</button>
 				</div>
 				<div>
-				<button class="button" id = "sign_out"/>Sign Out</button>
+				<button class="button" id = "sign_out" onclick = "driverSignOut()"/>Sign Out</button>
 				</div>
 			</div>
 		  </div>
@@ -71,21 +71,21 @@
 				<button id = "search" class="customer_search button" onclick = "driverConfirmedPickUp()"/>Confirm Picked Up</button>
 			</div>
 			<div class= "textLabel" id = "button4Label">
-				<button id = "cancel" class="quit button"/>Cancel</button>
+				<button id = "cancel" class="quit button" onclick = "driverCancel()"/>Cancel</button>
 			</div>
 			<div>
-				<button class="button" id = "sign_out"/>Sign Out</button>
+				<button class="button" id = "sign_out" onclick = "driverSignOut()"/>Sign Out</button>
 			</div>
 		  </div>
 		  <div class="left_Panel" id = "thirdPanel">
 			<div class= "textLabel" id = "button5Label">
-				<button id = "search" class="customer_search button"/>Confirm Ride Finish</button>
+				<button id = "search" class="customer_search button"/>Confirm Ride End</button>
 			</div>
 			<div class= "textLabel" id = "button6Label">
-				<button id = "cancel2" class="quit button"/>Cancel</button>
+				<button id = "cancel" class="quit button" onclick = "driverCancel()"/>Cancel</button>
 			</div>
 			<div>
-				<button class="button" id = "sign_out"/>Sign Out</button>
+				<button class="button" id = "sign_out" onclick = "driverSignOut()"/>Sign Out</button>
 				</div>
 		  </div>
       </div>

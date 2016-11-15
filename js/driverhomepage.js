@@ -340,7 +340,7 @@ function setUserCurrentLocation(position){
 });
 }
 
-//Functions for when users click the "Confirm Picked Up" Button
+//Functions for when driver click the "Confirm Picked Up" button
 function driverConfirmedPickUp(){
 	$.ajax({
       url: "php/driverConfirmPickUp.php", 
@@ -356,6 +356,46 @@ function driverConfirmedPickUp(){
       	}
       }
     });
+	document.getElementById("secondPanel").style.display = "none";
+	document.getElementById("thirdPanel").style.display = "block";
+}
+
+//Functino for when driver click the "COnfirm Ride End" button
+function driverConfirmedEnd(){
+	
+	//This section is for code to change status of the ride in trans table. Need to confirm what code to use first
+	
+	document.getElementById("thirdPanel").style.display = "none";
+	document.getElementById("firstPanel").style.display = "block";
+}
+
+//Function for when driver click "Change Role" button
+function driverChangeRole(){
+	
+	driverCancel();
+	
+	//Code to change pages
+	
+}
+
+//Function for when driver click the "Cancel" button
+function driverCancel(){
+	
+	//Call database through Ajax and remove from rdyDriv table and change trans table state code
+	
+	document.getElementById("secondPanel").style.display = "none";
+	document.getElementById("thirdPanel").style.display = "none";
+	document.getElementById("firstPanel").style.display = "block";
+}
+
+//Function for when driver click "signout" button
+function driverSignOut(){
+	
+	driverCancel();
+	
+	//Code to destroy(?) session
+	//Code to change current page to the index page 
+	
 }
 
 
