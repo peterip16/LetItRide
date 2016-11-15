@@ -68,7 +68,7 @@
 		  </div>
 		  <div class="left_Panel" id = "secondPanel">
 			<div class= "textLabel" id = "button3Label">
-				<button id = "search" class="customer_search button"/>Confirm Picked Up</button>
+				<button id = "search" class="customer_search button" onclick = "driverConfirmedPickUp()"/>Confirm Picked Up</button>
 			</div>
 			<div class= "textLabel" id = "button4Label">
 				<button id = "cancel" class="quit button"/>Cancel</button>
@@ -93,8 +93,8 @@
     
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZH1m8DpmJxoEb-708cFe9u9rBFn_4B9g&libraries=places&callback=initMap"
-         async ></script>
-    <script src="http://www.geocodezip.com/scripts/v3_epoly.js" async defer></script>
+         async defer></script>
+	<script src="http://www.geocodezip.com/scripts/v3_epoly.js" async defer></script>
     <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
 

@@ -340,6 +340,24 @@ function setUserCurrentLocation(position){
 });
 }
 
+//Functions for when users click the "Confirm Picked Up" Button
+function driverConfirmedPickUp(){
+	$.ajax({
+      url: "php/driverConfirmPickUp.php", 
+      method: "post",
+      data: {destAddress: destinationAddress},
+      success: function(data){
+      	if(data != false)
+      	{          
+	      	console.log(data);
+      	}
+      	else {
+      		console.log(data);
+      	}
+      }
+    });
+}
+
 
 function createMarker(latlng, label, html) {
   console.log("createMarker");
