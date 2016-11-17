@@ -659,12 +659,12 @@ function waitForDriver() {
           }
           else if(data == true && pathComplete == true){
             pathComplete = false;
+            clearTimeout(timer);
+            timer = 0;
             console.log("Driver is here");
+            console.log("Waiting for confirmation");
+            timer = setTimeout(waitForConfirmation(), interval);
             //navigator.geolocation.getCurrentPosition(setUserCurrentLocation);
-            fromAddress = myAddress;
-            toAddress = destinationAddress;
-            console.log("Driving to destination");
-            serviceCalculateRoute();
           }
           else {
             timer = setTimeout(waitForDriver(), interval);
@@ -673,6 +673,30 @@ function waitForDriver() {
           }
       }
 });
+}
+function waitForConfirmation() {
+   $.ajax({
+      url: "php/checkConfirm2.php", 
+      method: "post",
+      data: {driverID: driverID},
+      success: function(data){
+        if(data != true){
+          console.log(data);
+          console.log("Waiting for confirmation");
+          clearTimeout(timer);
+          timer = 0;
+          timer = setTimeout(waitForConfirmation(), interval);
+        }
+        else{
+          clearTimeout(timer);
+          timer = 0;
+          console.log("Driver has confirmed, now going to destination");
+          fromAddress = myAddress;
+          toAddress = destinationAddress;
+          serviceCalculateRoute();
+        }
+      }
+  });
 }
 function stopService() {
   if(serviceStatus == true) {

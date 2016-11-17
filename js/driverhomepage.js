@@ -281,7 +281,7 @@ function getToCustomer() {
             clearTimeout(timer);
             timer = 0;
             console.log("Waiting for confirmation");
-            timer = setTimeout(waitforConfirm(), interval);
+            timer = setTimeout(waitForConfirm(), interval);
           }
           else {
             console.log("Getting to customer");
@@ -294,19 +294,22 @@ function getToCustomer() {
     });
 }
 
-function waitforConfirm() {
+function waitForConfirm() {
    $.ajax({
       url: "php/checkConfirm.php", 
       method: "post",
       data: {customerID: customerID},
       success: function(data) {
         if(data != true) {
+          console.log(data);
           console.log("Waiting for confirmation");
           clearTimeout(timer);
           timer = 0;
-          timer = setTimeout(waitforConfirm(), interval);
+          timer = setTimeout(waitForConfirm(), interval);
         }
         else {
+          clearTimeout(timer);
+          timer = 0;
           fromAddress = toAddress;
           toAddress = destinationAddress;
           console.log("Customer pick-up confirmed, driving to destination");
@@ -368,18 +371,17 @@ function driverConfirmedPickUp(){
       method: "post",
       data: {customerID: customerID},
       success: function(data){
-		  console.log(data);
       	if(data != false)
       	{         	
-	      	console.log(data);
+	      	console.log("Cannot confirm pickup yet");
       	}
       	else {
-      		console.log(data);
+      		console.log("Confirmed pickup");
+          document.getElementById("secondPanel").style.display = "none";
+          document.getElementById("thirdPanel").style.display = "block";
       	}
       }
     });
-	document.getElementById("secondPanel").style.display = "none";
-	document.getElementById("thirdPanel").style.display = "block";
 }
 
 //Functino for when driver click the "COnfirm Ride End" button
