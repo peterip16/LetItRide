@@ -409,7 +409,7 @@ function driverCancel(){
 function driverSignOut(){
 	
 	driverCancel();
-	
+	window.location = "signout.php";
 	//Code to destroy(?) session
 	//Code to change current page to the index page 
 	
