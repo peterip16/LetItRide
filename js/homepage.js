@@ -91,7 +91,7 @@ function initMap() {
     center: {lat: 37.7749, lng: -122.4194},
     zoom: 15,
     mapTypeId: 'roadmap',
-    disableDefaultUI: true,
+    // disableDefaultUI: true,
     zoomControl: true
   });
   map.setClickableIcons(false);
@@ -405,7 +405,7 @@ function displayDirections(data) {
   duration = (data.routes[fastestIndex].legs[0].duration_in_traffic.value / 60).toFixed(0);
 
   displayTimeDistance.innerHTML = "";
-  displayTimeDistance.innerHTML += "Distance: " + distance + "mi Duration: about" + duration +" minutes"
+  displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br/ >Duration: about" + duration +" minutes"
   var routename = data.routes[fastestIndex].summary; //USED CURRENTLY FOR COMPARE
   //console.log(routename);
   var date =  new Date();
