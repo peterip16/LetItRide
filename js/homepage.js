@@ -157,6 +157,185 @@ function toggleTraffic(){
     }
 } 
 
+function calculateEachDriver(driver){
+      directionsService = new google.maps.DirectionsService;
+      directionsDisplay = new google.maps.DirectionsRenderer;
+      directionsDisplay.setMap(map);
+
+
+      directionsService.route({
+            origin: document.getElementById('from').value,
+            destination: driver['location'],
+            travelMode: 'DRIVING'
+          }, function(response, status) {
+            if (status === 'OK') {
+
+              var route = response.routes[0];
+              var str = route.legs[0].duration.text;
+
+              time = str.substr(0, str.lastIndexOf("mins") - 1);
+              
+              
+                // alert(driver['name'] + "      "+ time);
+             
+                if(!isNaN(time)){
+                  time = Number(time);
+                  // if(waitingTime > time){
+                  //   waitingTime = time;
+                  // }
+                  var driverId = driver['id'];
+
+                  var name = driver['name'];
+                  var phone = driver['phone'];
+
+                  var license = driver['license'];
+                  var plate = driver['plate'];
+                  var model = driver['model'];
+                  // foundDriver(driverId, name, phone, license, plate, model, waitingTime);
+                  arr.push( {
+                      id: driverId,
+                      name: name,
+                      phone: phone,
+                      license: license,
+                      plate: plate,
+                      model: model,
+                      time: time
+                  });
+                }
+
+                
+                // return 1;
+              }
+
+            });
+}
+
+function requestADriver(){
+      // alert("hello");
+
+      // var popUp = document.getElementById("noDriverScreen");
+
+
+      
+      // popUp.style.display("block");
+
+
+      $.getJSON('php/requestDrive.php', function(data){
+
+        // alert(data.result.length);
+      // $.each(data.result, function(){
+      
+      // var driverId;
+      var waitingTime = 999999;
+      var time;
+      // var j = 0;
+      var driverIndex;
+      if(data.result.length > 0) {
+        // alert(data.result.length );
+
+        arr = [];
+        for(i = 0; i < data.result.length; i++){
+
+          calculateEachDriver(data.result[i]);
+
+        }
+        // alert(arr[0]);
+        // setTimeout(alert(arr[0]), 5000);
+        setTimeout(function(){ 
+            // alert(arr.length );
+            if(arr.length > 0){
+              for(i = 0; i < arr.length; i++){
+                // alert(arr[i].wtime);
+                if(arr[i].time < waitingTime){
+                  waitingTime = arr[i].time;
+                  driverIndex = i;
+                }
+              }
+              foundDriver(arr[driverIndex].id, arr[driverIndex].name, arr[driverIndex].phone, 
+                      arr[driverIndex].license, arr[driverIndex].plate, arr[driverIndex].model, arr[driverIndex].time);
+            }else{
+              displayNoDriver();
+            }
+
+
+            }, 500);
+
+
+        
+        
+
+
+
+      }
+     else{
+        displayNoDriver();
+     }
+
+     // alert(j);
+
+    });
+
+    // alert(j);
+
+}
+
+function foundDriver(id, name, phone, license, plate, model, time){
+  // alert(time > 30);
+  // alert(id + " " + name  + " " + phone + " " + license + " " + plate + " " + model  + " " + time);
+  // alert(time);
+  if(time > 30){
+          displayNoDriver();
+  }else{
+    // alert(id.substr(62));
+    // for(i = 0; i < id.length; i++){
+    //   alert(id.charAt(i) != 0);
+    //   if(id.charAt(i) != 0){
+    //     id.substr(i);
+    //     break;
+    //   }
+    // }
+    // alert(id + " " + name  + " " + phone + " " + license + " " + plate + " " + model  + " " + time);
+    id = id.substr(60);
+    var nm = $('#diverName');
+    var did = $('#drivId');
+    var carModel = $('#model');
+    var lic = $('#license');
+    var pl = $('#plate');
+    var ph = $('#phone');
+    var waitingTime = $('#waitingTime');
+
+    nm.html(name);
+    did.html("Driver ID: "+ "\t" +id);
+    carModel.html("Car model: " +"\t" +model);
+    lic.html("Driver license: " + "\t" +license);
+    pl.html("Plate number: " + "\t" +plate);
+    ph.html("Contact phone number: " + "\t" +phone);
+    waitingTime.html("Eastimated waiting time:" + "\t" + time + " mins");
+
+     // $(name).appendTo(nm);
+     // nm.append(name);
+
+    var popUp = $('#requestDriverScreen');
+    popUp.show();
+  }
+}
+
+function closeRequestDriver(){
+  var popUp = $('#requestDriverScreen');
+  popUp.hide();
+  calculateAndDisplayRoute();
+}
+
+function displayNoDriver(){
+  var popUp = $('#noDriverScreen');
+  popUp.show();
+}
+
+function closeNoDriver(){
+  var popUp = $('#noDriverScreen');
+  popUp.hide();
+}
+
 function calculateAndDisplayRoute(){
   $('#dirctionDiscription').empty();
   directionsDisplay.setPanel(document.getElementById('dirctionDiscription'));

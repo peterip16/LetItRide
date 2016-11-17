@@ -4,18 +4,82 @@ var body = $('body');
 var homePage = $('#homePage');
 var profile = $('#profilePage');
 var history = $('#historyPage');
+
 var username = $('input[name = "usr"]');
 var password = $('input[name = "pwd"]');
 var password2 = $('input[name = "pwd2"]');
 var email = $('input[name = "email"]');
 var phone = $('input[name = "phone"]');
 
+var button = $('#sumbitButton');
+
+password2.keyup( function(){
+	if( !$(this).val() ){
+		$(this).css("background", "pink");
+	}else if ( $(this).val() != password.val()) {
+		$(this).css("background", "pink");
+		password.css("background", "pink");
+	}else{
+		$(this).css("background", "white");
+		password.css("background", "white");
+	}
+});
+
+
+password.keyup( function(){
+	if( !$(this).val() ){
+		$(this).css("background", "pink");
+		// button.prop( "disabled", true );
+	}else if ( $(this).val() != password2.val()) {
+		$(this).css("background", "pink");
+		password2.css("background", "pink");
+		// button.prop( "disabled", true );
+	}else{
+		$(this).css("background", "white");
+		password2.css("background", "white");
+		// button.prop( "disabled", false );
+	}
+
+});
+
+phone.keyup(function(){
+	if( !$(this).val() ){
+		$(this).css("background", "pink");
+	}else{
+		$(this).css("background", "white");
+	}
+
+});
+
+username.keyup( function(){
+	if( !$(this).val() ){
+		$(this).css("background", "pink");
+	}else{
+		$(this).css("background", "white");
+	}
+
+});
+
+email.keyup(function(){
+	var email = /^\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i
+	var value = $(this).val();
+	if( !value ){
+		$(this).css("background", "pink");
+	}else if(!email.test(value)){
+		$(this).css("background", "pink");
+	}else{
+		$(this).css("background", "white");
+	}
+});
+
 
 $(document).ready(function() {
 		// Animate loader off screen
-		$('.se-pre-con').fadeOut(2000);
+		// alert("test");
+		$('.se-pre-con').fadeOut(4000);
 		// $(".se-pre-con").hide();
-		$.getJSON('js/getData.php', function(data){
+		// alert("hello");
+		$.getJSON('php/getData.php', function(data){
 			// $.each(data.result, function(){
 			// 	alert(this['id'] + " " + this['name'] + " " + this['email'] + " " + this['phone'] + " " + this['password']);
 			// 	// alert(ata.result[0]);
@@ -40,8 +104,6 @@ $(document).ready(function() {
 	});
 
 
-
-
 // $('#name').html("hello");
 // $.getJSON("getData.php", success = function(data){
 // 	alert(data[0]['Name']);
@@ -52,21 +114,21 @@ $(document).ready(function() {
 $('.tab').hide();
 
 $('.home').on('click',function(){
-	body.css("background-color","#1697d1")
+	body.css("background-color","#1697d1");
 	homePage.show();
 	profile.hide();
 	history.hide();
 });
 
 $('.profile').on('click',function(){
-	body.css("background-color","#33434f")
+	body.css("background-color","#33434f");
 	homePage.hide();
 	profile.show();
 	history.hide();
 });
 
 $('.history').on('click',function(){
-	body.css("background-color","#ee2e24")
+	body.css("background-color","#ee2e24");
 	homePage.hide();
 	profile.hide();
 	history.show();
@@ -78,3 +140,5 @@ $('.goBack').on('click', function(){
 });
 
 $('.home').click();
+
+

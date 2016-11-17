@@ -47,7 +47,7 @@
 
   </head>
   <body onload="initMap()">
-  <div class="se-pre-con"><img src="img/Preloader_3.gif"></div>
+  <div class="se-pre-con"><img src="php/randomImage.php" /></div>
    <div class="container">
   
       <div id="map"></div>
@@ -69,7 +69,7 @@
 
       <div class = "tab" id = "homePage">
           <div class="imagePanel">
-            <img class="profileImage" src = "js/getImage.php">
+            <img class="profileImage" src = "php/getImage.php">
             <div class="textLabel" id="name">FirstName LastName</div>
           </div>
         
@@ -83,7 +83,7 @@
                 <div class="switch-btn"></div>
             </label>
             <button class="button button-block" id = "myLocation"  onclick="recentering()"/>My location</button>
-            <button class="button button-block" id="requestAride" onclick = "calculateAndDisplayRoute()"/>Request A Ride</button>
+            <button class="button button-block" id="requestAride" onclick = "requestADriver()"/>Request A Ride</button>
           </div>
 
         <div class = "directionPanel" >
@@ -96,15 +96,15 @@
       </div>
 
         <div class = "tab" id ="profilePage" >
-          <form id = "profileInput" action ="js/submit.php" method = "post" enctype="multipart/form-data">
-          	<div class="form-group" >
+          <form id = "profileInput" action ="php/submit.php" method = "post" enctype="multipart/form-data">
+            <div class="form-group" >
               <input type='file'  id="imgInp" name = "profileImg"onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
-    		  <img id="blah" class = "selectImage" src = "js/getImage.php">
-	    		  <div class="upload"> 
-	    		  	<img src="img/upload.png"
-	                      onMouseOver=src="img/upload_hover.png"
-	                      onMouseOut=src="img/upload.png" onclick="document.getElementById('imgInp').click();">
-	               </div>
+          <img id="blah" class = "selectImage" src = "php/getImage.php">
+            <div class="upload"> 
+              <img src="img/upload.png"
+                        onMouseOver=src="img/upload_hover.png"
+                        onMouseOut=src="img/upload.png" onclick="document.getElementById('imgInp').click();">
+                 </div>
             </div>
 
             <div class="form-group" id = "nme">
@@ -142,6 +142,41 @@
       
         </div>
     </div> 
+
+    <div id="requestDriverScreen">
+        
+        <div class ="displayDirverInfo">
+          <div id="dirverImage">
+            <img class="dirverIm" src = "#" 
+                    onerror="this.onerror=null;this.src='img/default.jpg';">
+            <div class="textLabel" id="diverName"></div>
+          </div>
+          <div class="textLabel dInfo">
+
+            <p id="drivId"></p>
+            <p id="model"></p>
+            <p id="license"></p>
+            <p id="plate"></p>
+            <p id="phone"></p>
+            <p id="waitingTime"></p>
+          </div>
+          <button class="button button-block" id = "closeDriverInfo"  onclick="closeRequestDriver()"/>OK</button>
+        </div>
+    </div>
+
+
+
+    <div id="noDriverScreen">
+        <div class = "dirverInfo">
+          <div class = "textLabel noDriver">
+            <h3>No driver found</h3>
+            <p><br />Opps! Looks like someone<br /> <br /> needs to take a long walk</p>
+          </div>
+          <div class="closePopUp" title="close"  onclick="closeNoDriver()">
+            <p>X</p>
+          </div>
+        </div>
+    <div>
 
     <script src="js/homepage_jQuery.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZH1m8DpmJxoEb-708cFe9u9rBFn_4B9g&libraries=places,geometry,drawing&callback=initMap" async></script>
