@@ -254,7 +254,7 @@ function displayDirections(data) {
         directionsDisplay.setMap(map);
 
         if(emulateDriver) {
-          console.log("hello");
+          //console.log("hello");
           var bounds = new google.maps.LatLngBounds();
           var route = response.routes[0];
           startLocation[i] = new Object();
@@ -308,7 +308,7 @@ function displayDirections(data) {
 }
 
 function createMarker(latlng, label, html) {
-  console.log("createMarker");
+  //console.log("createMarker");
 // alert("createMarker("+latlng+","+label+","+html+","+color+")");
     var contentString = '<b>'+label+'</b><br>'+html;
     var marker = new google.maps.Marker({
@@ -379,8 +379,8 @@ function animate(index,d) {
 function startAnimation(index) {
   tick = (distance*1609.34)/(duration*60000);
   step = tick*2;
-  console.log(tick);
-  console.log("start animation");
+  //console.log(tick);
+  //console.log("start animation");
         if (timerHandle[index]) clearTimeout(timerHandle[index]);
         eol[index]=polyline[index].Distance();
         map.setCenter(polyline[index].getPath().getAt(0));

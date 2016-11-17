@@ -3,37 +3,23 @@ session_start();
 require 'connection.php';
 
 if (isset($_POST)) {
-	$destAddress= $_POST['destAddress'];
+	$customerID = $_POST['customerID'];
 	$userID = $_SESSION['UserID'];
 	
-	$query = "SELECT FROM `trans` WHERE DrivID='$userID' AND destin='$destAddress' AND State='c'";
+	$query = "SELECT * FROM `trans` WHERE DrivID='$userID' AND CustID='$customerID' AND State='c'";
+	echo $query;
 	$result = mysqli_query($mysqli, $query) or die(mysql_error());
-
-	if (mysqli_num_rows($result) > 0){ 
-		$query = "UPDATE `trans` SET drivConfirm='ye' WHERE DrivID='$userID' AND destin='$destAddress'";
+	if (mysqli_num_rows($result) > 0){
+		$query = "UPDATE `trans` SET drivConfirm='ye' WHERE DrivID='$userID' AND CustID='$customerID' AND State='c'";
 		$result = mysqli_query($mysqli, $query) or die(mysql_error());
-		if ($result){
-			echo "Driver Confirmed.";
-		} else {
-		echo "Driver was not confirmed.";		
+		if($result) {
+			echo true;
 		}
-	} else {
-		echo "No row was founded."
+		else echo false;
 	}
-	/*
-	else {
-		//echo "Couldn't find any driver with the right ID";
-		$query = "UPDATE `trans` SET drivConfirm='ye' WHERE DrivID='$userID' AND destin='$destAddress'";
-		$result = mysqli_query($mysqli, $query) or die(mysql_error());
-		if ($result){
-			echo "Driver Confirmed";
-		} else {
-		echo "Driver was not confirmed.";		
-		}
+	else
+	{
+		echo false;
 	}
-	else {
-		echo "Post has nothing.";
-	}
-	*/
 }
 ?>

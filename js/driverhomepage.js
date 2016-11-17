@@ -271,7 +271,7 @@ function getToCustomer() {
       success: function(data) {
           if(data != true){
             console.log("Getting to customer");
-            console.log(data);
+            //console.log(data);
             clearTimeout(timer);
             timer = 0;
             timer = setTimeout(getToCustomer(), interval);
@@ -280,13 +280,12 @@ function getToCustomer() {
             pathComplete = false; 
             clearTimeout(timer);
             timer = 0;
-            fromAddress = toAddress;
-            toAddress = destinationAddress;
-            ("Customer picked up, driving to destination");
-            calculateAndDisplayRoute();
+            console.log("Waiting for confirmation");
+            timer = setTimeout(waitforConfirm(), interval);
           }
           else {
             console.log("Getting to customer");
+            //console.log(data);
             clearTimeout(timer);
             timer = 0;
             timer = setTimeout(getToCustomer(), interval);
@@ -295,6 +294,27 @@ function getToCustomer() {
     });
 }
 
+function waitforConfirm() {
+   $.ajax({
+      url: "php/checkConfirm.php", 
+      method: "post",
+      data: {customerID: customerID},
+      success: function(data) {
+        if(data != true) {
+          console.log("Waiting for confirmation");
+          clearTimeout(timer);
+          timer = 0;
+          timer = setTimeout(waitforConfirm(), interval);
+        }
+        else {
+          fromAddress = toAddress;
+          toAddress = destinationAddress;
+          console.log("Customer pick-up confirmed, driving to destination");
+          calculateAndDisplayRoute();
+        }
+      }
+    });
+}
 function stopService() {
   if(serviceStatus == true) {
      $.ajax({
@@ -346,7 +366,7 @@ function driverConfirmedPickUp(){
 	$.ajax({
       url: "php/driverConfirmPickUp.php", 
       method: "post",
-      data: {destAddress: destinationAddress},
+      data: {customerID: customerID},
       success: function(data){
 		  console.log(data);
       	if(data != false)
@@ -406,13 +426,14 @@ function driverCancel(){
 }
 
 //Function for when driver click "signout" button
+//Function for when driver click "signout" button
 function driverSignOut(){
-	
-	driverCancel();
-	window.location = "signout.php";
-	//Code to destroy(?) session
-	//Code to change current page to the index page 
-	
+  
+  driverCancel();
+  window.location = "signout.php";
+  //Code to destroy(?) session
+  //Code to change current page to the index page 
+  
 }
 
 
