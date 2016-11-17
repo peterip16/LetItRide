@@ -342,13 +342,15 @@ function setUserCurrentLocation(position){
 
 //Functions for when driver click the "Confirm Picked Up" button
 function driverConfirmedPickUp(){
+	console.log(destinationAddress);
 	$.ajax({
       url: "php/driverConfirmPickUp.php", 
       method: "post",
       data: {destAddress: destinationAddress},
       success: function(data){
+		  console.log(data);
       	if(data != false)
-      	{          
+      	{         	
 	      	console.log(data);
       	}
       	else {
@@ -382,6 +384,21 @@ function driverChangeRole(){
 function driverCancel(){
 	
 	//Call database through Ajax and remove from rdyDriv table and change trans table state code
+	
+	$.ajax({
+      url: "php/driverCancel.php", 
+      method: "post",
+      data: {destAddress: destinationAddress},
+      success: function(data){
+      	if(data != false)
+      	{          
+	      	console.log(data);
+      	}
+      	else {
+      		console.log(data);
+      	}
+      }
+    });
 	
 	document.getElementById("secondPanel").style.display = "none";
 	document.getElementById("thirdPanel").style.display = "none";
