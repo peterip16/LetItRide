@@ -376,7 +376,6 @@ function driverConfirmedPickUp(){
           console.log("Confirmed pickup");
           document.getElementById("secondPanel").style.display = "none";
           document.getElementById("thirdPanel").style.display = "block";
-	      	console.log("Cannot confirm pickup yet");
       	}
       	else {
       		console.log("Cannot confirm pickup yet");
@@ -389,9 +388,24 @@ function driverConfirmedPickUp(){
 function driverConfirmedEnd(){
 	
 	//This section is for code to change status of the ride in trans table. Need to confirm what code to use first
-	
-	document.getElementById("thirdPanel").style.display = "none";
-	document.getElementById("firstPanel").style.display = "block";
+
+  console.log("Attempting to change status of ride to end");
+  $.ajax({
+      url: "php/driverConfirmRideEnd.php", 
+      method: "post",
+      data: {customerID: customerID},
+      success: function(data){
+        if(data != false)
+        {           
+          console.log("Confirmed ride ended.");
+          document.getElementById("thirdPanel").style.display = "none";
+          document.getElementById("firstPanel").style.display = "block";
+        }
+        else {
+          console.log("Cannot end ride yet");
+        }
+      }
+    });
 }
 
 //Function for when driver click "Change Role" button
