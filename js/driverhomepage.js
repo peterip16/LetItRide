@@ -373,12 +373,13 @@ function driverConfirmedPickUp(){
       success: function(data){
       	if(data != false)
       	{         	
+          console.log("Confirmed pickup");
+          document.getElementById("secondPanel").style.display = "none";
+          document.getElementById("thirdPanel").style.display = "block";
 	      	console.log("Cannot confirm pickup yet");
       	}
       	else {
-      		console.log("Confirmed pickup");
-          document.getElementById("secondPanel").style.display = "none";
-          document.getElementById("thirdPanel").style.display = "block";
+      		console.log("Cannot confirm pickup yet");
       	}
       }
     });
