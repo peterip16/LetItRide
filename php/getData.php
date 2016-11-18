@@ -1,8 +1,14 @@
 <?php
+	session_start();
+
 	mysql_connect("localhost","root","password") or die(mysql_error());
 	mysql_select_db("LetItRideSystem") or die(mysql_error());
 
-	$query = mysql_query("SELECT * FROM rut WHERE UserID = 1");
+
+	
+	$userID = $_SESSION['UserID'];
+
+	$query = mysql_query("SELECT * FROM rut WHERE UserID = '$userID'");
 
 	// $numrows = mysql_num_rows($query);
 

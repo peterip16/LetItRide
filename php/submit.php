@@ -1,7 +1,13 @@
 <?php
 
+	session_start();
+
 	mysql_connect("localhost","root","password") or die(mysql_error());
 	mysql_select_db("LetItRideSystem") or die(mysql_error());
+
+
+	
+	$userID = $_SESSION['UserID'];
 
 
 	$name = $_POST['usr'];
@@ -24,7 +30,7 @@
 
 	// mysql_query("UPDATE rut SET Image = '$image' WHERE UserID = 1");
 
-	mysql_query("UPDATE rut SET Email = '$email', Password = '$password' , Name = '$name', Phonenumber = '$phone', Image = '$image' WHERE UserID = 1");
+	mysql_query("UPDATE rut SET Email = '$email', Password = '$password' , Name = '$name', Phonenumber = '$phone', Image = '$image' WHERE UserID = '$userID'");
 
 	header("Location: ../customerHomepage.html"); 
 	exit();
