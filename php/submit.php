@@ -14,6 +14,7 @@
 	$email = $_POST['email'];
 	$password = $_POST['pwd'];
 	$phone = $_POST['phone'];
+	$ccard = $_POST['ccard'];
 
 
 	$file = $_FILES['profileImg']['tmp_name'];
@@ -31,6 +32,8 @@
 	// mysql_query("UPDATE rut SET Image = '$image' WHERE UserID = 1");
 
 	mysql_query("UPDATE rut SET Email = '$email', Password = '$password' , Name = '$name', Phonenumber = '$phone', Image = '$image' WHERE UserID = '$userID'");
+	mysql_query("UPDATE cit SET CCnumber = '$ccard' WHERE UserID = '$userID'");
+
 
 	header("Location: ../customerHomepage.html"); 
 	exit();
