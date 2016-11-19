@@ -2,7 +2,6 @@
 	session_start();
 	require 'connection.php';
 
-	
 	if (isset($_POST)) {
 		$userID = $_SESSION['UserID'];
 
@@ -33,15 +32,13 @@
 			$result = mysqli_query($mysqli, $query) or die(mysql_error());
 			if ($result){
 				//echo "Driver Confirmed\n";
-				echo false;
+				echo true;
 		}
 		else {
 			echo false;
 		}
 		*/
-		
-		} else {
-			echo false;
-		}
-	
+	} else {
+		echo "Things aren't set in PHP file."
+	}
 	?>

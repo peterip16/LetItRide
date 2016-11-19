@@ -38,6 +38,7 @@ var timerHandle = [];
 var ditance, duration;
 var emulateDriver = false;
 var pathComplete = false;
+var routeNumber = 0;
 //MARKER FUNCTIONS//
 function clearDestinationMarkers() {
   if(desitinationMarker != null){
@@ -431,6 +432,7 @@ function displayDirections(data) {
       //console.log(response.routes[i]);
       if(response.routes[i].summary == routename)
       {
+        routeNumber = i;
         $('.inputPanel').hide();
         $('.directionPanel').show();
         directionsDisplay.setDirections(response);
@@ -787,6 +789,7 @@ function storeLongLat()
 
 //START SERVICE FOR CUSTOMER
 function startService() {
+  console.log("starting service");
   if(serviceStatus == false) {
     serviceStatus = true;
     $.ajax({
@@ -865,16 +868,18 @@ function waitForConfirmation() {
       data: {driverID: driverID},
       success: function(data){
         if(data != true){
-          console.log(data);
+          //console.log(data);
           console.log("Waiting for confirmation");
           clearTimeout(timer);
           timer = 0;
           timer = setTimeout(waitForConfirmation(), interval);
         }
-        else{
+        else {
+          myMarker[routeNumber].setMap(null);
           clearTimeout(timer);
           timer = 0;
           console.log("Driver has confirmed, now going to destination");
+          timer = setTimeout(waitForDropOff(), interval);
           fromAddress = myAddress;
           toAddress = destinationAddress;
           serviceCalculateRoute();
@@ -882,6 +887,32 @@ function waitForConfirmation() {
       }
   });
 }
+
+function waitForDropOff() {
+  $.ajax({
+      url: "php/customerConfirmDropOff.php", 
+      method: "post",
+      data: {driverID: driverID},
+      success: function(data){
+        if(data != true){
+          console.log("Waiting for drop-off confirmation");
+          clearTimeout(timer);
+          timer = 0;
+          timer = setTimeout(waitForDropOff(), interval);
+        }
+        else{
+          $('.directionPanel').hide();
+          $('.inputPanel').show();
+          console.log("Destination reached");
+          recentering();
+          directionsDisplay.setMap(null);
+          myMarker[routeNumber].setMap(null);
+          serviceStatus = false;
+        }
+      }
+  });
+}
+
 function stopService() {
   if(serviceStatus == true) {
      $.ajax({

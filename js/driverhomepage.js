@@ -34,6 +34,7 @@ var timerHandle = [];
 var distance, duration;
 var pathComplete = false;
 var emulateDriver = false;
+var routeNumber = 0;
 
 function initMap(location) {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -47,7 +48,7 @@ function initMap(location) {
     navigator.geolocation.getCurrentPosition(setUserCurrentLocation);
   }
   else{
-	  location.reload();
+    location.reload();
   }
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer({
@@ -58,7 +59,7 @@ function initMap(location) {
 }
 
 function calculateAndDisplayRoute(){
-	console.log("calculating route");
+  console.log("calculating route");
   getTrafficPath(); //CALCULATE AND DISPLAYS PATH
   //storeLongLat(); //STORE USER's PICKUP LOCATION + DESTINATION
   //clearPickUpLocationMarkers(); 
@@ -97,7 +98,7 @@ function getTrafficPath() {
 }
 
 function displayDirections(data) {
-	console.log("Displaying directions\n");
+  console.log("Displaying directions\n");
   var i = data.routes.length;
   //console.log("# of routes: " +i);
   var fastestIndex = 0;
@@ -138,15 +139,16 @@ function displayDirections(data) {
       //console.log(response.routes[i].summary);
       if(response.routes[i].summary == routename)
       {
-		document.getElementById("firstPanel").style.display = "none";
+        routeNumber = i;
+    document.getElementById("firstPanel").style.display = "none";
         $('.secondPanel').show();
-		document.getElementById("secondPanel").style.display = "block";
+    document.getElementById("secondPanel").style.display = "block";
         directionsDisplay.setDirections(response);
         directionsDisplay.setRouteIndex(i);
         directionsDisplay.setMap(map);
 
         if(emulateDriver) {
-          console.log("hello");
+          //console.log("hello");
           var bounds = new google.maps.LatLngBounds();
           var route = response.routes[0];
           startLocation[i] = new Object();
@@ -208,17 +210,16 @@ function startService() {
       method: "post",
       data: {address: driverAddress, lat: driverLat, lng: driverLng},
       success: function(data){
-      	if(data != false)
-      	{          
-	      	console.log(data);
-	        timer = setTimeout(getCustomer(), interval); //begin searching for customer
-      	}
-      	else {
-      		console.log(data);
-      	}
+        if(data != false)
+        {          
+          console.log(data);
+          timer = setTimeout(getCustomer(), interval); //begin searching for customer
+        }
+        else {
+          console.log(data);
+        }
       }
-    });
-    
+    }); 
   }
 }
 
@@ -263,8 +264,8 @@ function getCustomer() {
 }
 
 function getToCustomer() {
-	 
-	  //navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
+   
+    //navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
     $.ajax({
       url: "php/getToCustomer.php", 
       method: "post",
@@ -278,7 +279,6 @@ function getToCustomer() {
             timer = setTimeout(getToCustomer(), interval);
           }
           else if(data == true && pathComplete == true){
-            pathComplete = false; 
             clearTimeout(timer);
             timer = 0;
             console.log("Waiting for confirmation");
@@ -302,7 +302,6 @@ function waitForConfirm() {
       data: {customerID: customerID},
       success: function(data) {
         if(data != true) {
-          console.log(data);
           console.log("Waiting for confirmation");
           clearTimeout(timer);
           timer = 0;
@@ -314,6 +313,7 @@ function waitForConfirm() {
           fromAddress = toAddress;
           toAddress = destinationAddress;
           console.log("Customer pick-up confirmed, driving to destination");
+          myMarker[routeNumber].setMap(null);
           calculateAndDisplayRoute();
         }
       }
@@ -326,12 +326,12 @@ function stopService() {
       method: "post",
       data: {driverAddress: driverAddress},
       success: function(data){
-      	if(data != false) {
-        	console.log(data);
-    	}
-    	else {
-    		console.log("You have not started the service yet");
-    	}
+        if(data != false) {
+          console.log(data);
+      }
+      else {
+        console.log("You have not started the service yet");
+      }
       }
     });  
     clearTimeout(timer);
@@ -366,90 +366,98 @@ function setUserCurrentLocation(position){
 
 //Functions for when driver click the "Confirm Picked Up" button
 function driverConfirmedPickUp(){
-	console.log(destinationAddress);
-	$.ajax({
+  if(pathComplete == true) {
+  $.ajax({
       url: "php/driverConfirmPickUp.php", 
       method: "post",
       data: {customerID: customerID},
       success: function(data){
-      	if(data != false)
-      	{         	
+        if(data == false)
+        {           
+          console.log("Cannot confirm pickup yet");
+        }
+        else {  
+          pathComplete = false; 
           console.log("Confirmed pickup");
           document.getElementById("secondPanel").style.display = "none";
           document.getElementById("thirdPanel").style.display = "block";
-      	}
-      	else {
-      		console.log("Cannot confirm pickup yet");
-      	}
+        }
       }
     });
+   }
+   else console.log("Cannot confirm pickup yet");
 }
 
 //Functino for when driver click the "COnfirm Ride End" button
 function driverConfirmedEnd(){
-	
-	//This section is for code to change status of the ride in trans table. Need to confirm what code to use first
-
-  console.log("Attempting to change status of ride to end");
+  //This section is for code to change status of the ride in trans table. Need to confirm what code to use first
+  //console.log("Attempting to change status of ride to end");
+ if(pathComplete == true) {
   $.ajax({
       url: "php/driverConfirmRideEnd.php", 
       method: "post",
       data: {customerID: customerID},
       success: function(data){
-        if(data != false)
+        if(data == false)
         {           
-          console.log("Confirmed ride ended.");
-          document.getElementById("thirdPanel").style.display = "none";
-          document.getElementById("firstPanel").style.display = "block";
+          console.log("Cannot confirm drop-off yet");
         }
         else {
-          console.log("Cannot end ride yet");
+          pathComplete = false; 
+          console.log("Confirmed ride ended.");
+          document.getElementById("secondPanel").style.display = "none";
+          document.getElementById("thirdPanel").style.display = "none";
+          document.getElementById("firstPanel").style.display = "block";
+          navigator.geolocation.getCurrentPosition(setUserCurrentLocation);
+          directionsDisplay.setMap(null); 
+          myMarker[routeNumber].setMap(null);
+          serviceStatus = false;
         }
       }
     });
+ }
+ else console.log("Cannot confirm drop-off yet");
 }
 
 //Function for when driver click "Change Role" button
 function driverChangeRole(){
-	
-	driverCancel();
-	
+  
+  driverCancel();
+  
   console.log("Proceeding to change the page.");
-	//Code to change pages
-	
+  //Code to change pages
+  
 }
 
 //Function for when driver click the "Cancel" button
 function driverCancel(){
-	
-	//Call database through Ajax and remove from rdyDriv table and change trans table state code
-	
-  //window.clearTimeout(timer);
-  //window.clearInterval(timer);
+  
+  //Call database through Ajax and remove from rdyDriv table and change trans table state code
+  
+  //clearInterval(timer);
   //console.log("Testing function.");
+  driverAddress = "";
+  console.log("Random driver address set.");
 
-  console.log("Canceling driver action now...");
-
-	$.ajax({
+  $.ajax({
       url: "php/driverCancel.php", 
       method: "post",
-      data: {},
+      data: {driverAddress: driverAddress},
       success: function(data){
         if(data != false)
-        {           
-		  console.log("Cancel successful");
-          console.log("Value: " + data);
+        {          
+          console.log("Canceled successfully.");
+          console.log(data);
         }
         else {
-          console.log("Cancel unsuccessful");
-		  console.log("Value: " + data);
+          console.log("Cancel unsuccessful.");
         }
       }
     });
-	
-	document.getElementById("secondPanel").style.display = "none";
-	document.getElementById("thirdPanel").style.display = "none";
-	document.getElementById("firstPanel").style.display = "block";
+  
+  document.getElementById("secondPanel").style.display = "none";
+  document.getElementById("thirdPanel").style.display = "none";
+  document.getElementById("firstPanel").style.display = "block";
 }
 
 //Function for when driver click "signout" button
@@ -465,7 +473,7 @@ function driverSignOut(){
 
 
 function createMarker(latlng, label, html) {
-  console.log("createMarker");
+  //console.log("createMarker");
 // alert("createMarker("+latlng+","+label+","+html+","+color+")");
     var contentString = '<b>'+label+'</b><br>'+html;
     var marker = new google.maps.Marker({
@@ -535,7 +543,8 @@ function animate(index,d) {
 
 function startAnimation(index) {
   tick = (distance*1609.34)/(duration*60000);
-  step = tick*2;
+  console.log(tick);
+  step = tick*4;
   console.log(tick);
   console.log("start animation");
         if (timerHandle[index]) clearTimeout(timerHandle[index]);

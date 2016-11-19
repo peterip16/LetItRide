@@ -15,7 +15,7 @@ $query = "SELECT *, 3956 * 2 * ASIN(SQRT(POWER(SIN((lat - abs('$fromLat')) * pi(
 
 $result = mysqli_query($mysqli, $query) or die(mysql_error());
 if (mysqli_num_rows($result) < 1) { 
-	sleep(5);
+	sleep(1);
 	echo false;
 }
 
@@ -29,7 +29,7 @@ else {
 	    $Distance = $row["distance"];
 	}
 
-	$query = "SELECT * FROM `trans` WHERE CustID='$userID' AND State != 'b'";
+	$query = "SELECT * FROM `trans` WHERE CustID='$userID' AND State != 'e'";
 	$result = mysqli_query($mysqli, $query) or die(mysql_error());
 	if (mysqli_num_rows($result) > 0){ 
 		echo false;
@@ -49,7 +49,7 @@ else {
 			$result = mysqli_query($mysqli, $query) or die(mysql_error());
 			
 		    $data = [ 'name' => $driverName, 'driverID' => $DriverID, 'driverAddress' => $DriverLocation, 'driverLat' => $DriverLat, 'driverLng' => $DriverLng, 'distance' => $Distance];
-		    sleep(5);
+		    sleep(1);
 	    	echo json_encode($data);
     	}
 	}

@@ -7,10 +7,10 @@ $driverAddress = $_POST['driverAddress'];
 $driverLat = $_POST['driverLat'];
 $driverLng = $_POST['driverLng'];
 
-$query = "SELECT * FROM `trans` WHERE DrivID='$userID' AND State != 'b'";
+$query = "SELECT * FROM `trans` WHERE DrivID='$userID' AND State != 'e'";
 $result = mysqli_query($mysqli, $query) or die(mysql_error());
 if (mysqli_num_rows($result) < 1){ 
- 	sleep(5);
+ 	sleep(1);
  	echo false;
 }
 else {
@@ -21,7 +21,7 @@ else {
 		//$result = mysqli_query($mysqli, $query) or die(mysql_error());
 
 		//get customer ID
-		$query = "SELECT CustID, destin, destiLat, destiLng, custAddr, custLat, custLng FROM `trans` WHERE DrivID='$userID' AND State != 'b'";
+		$query = "SELECT CustID, destin, destiLat, destiLng, custAddr, custLat, custLng FROM `trans` WHERE DrivID='$userID' AND State != 'e'";
         //echo $query;
 		$result = mysqli_query($mysqli, $query) or die(mysql_error());
 		while($row = $result->fetch_assoc()) {
@@ -62,7 +62,7 @@ else {
     	// $data['customerLng'] = array($customerLng);
 
         $data = [ 'name' => $customerName, 'customerID' => $customerID, 'destinationAddress' => $destination, 'destinationLat' => $destinationLat, 'destinationLng' => $destinationLng,'customerAddress'=> $customerAddress,'customerLat'=> $customerLat, 'customerLng' => $customerLng ];
-        sleep(5);
+        sleep(1);
     	echo json_encode($data);
 }
 

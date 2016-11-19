@@ -7,15 +7,14 @@ if (isset($_POST)) {
 	$userID = $_SESSION['UserID'];
 	
 	$query = "SELECT * FROM `trans` WHERE DrivID='$userID' AND CustID='$customerID' AND State='c'";
-	echo $query;
+	//echo $query;
 	$result = mysqli_query($mysqli, $query) or die(mysql_error());
 	if (mysqli_num_rows($result) > 0){
-		$query = "UPDATE `trans` SET State='e' WHERE DrivID='$userID' AND CustID='$customerID' AND State='c'";
+		$query = "UPDATE `trans` SET custConfirm='ye' WHERE DrivID='$userID' AND CustID='$customerID' AND State='c'";
 		$result = mysqli_query($mysqli, $query) or die(mysql_error());
 		if($result) {
 			echo true;
 		}
-		else echo false;
 	}
 	else
 	{

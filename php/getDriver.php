@@ -15,7 +15,7 @@ $query = "SELECT *, 3956 * 2 * ASIN(SQRT(POWER(SIN((lat - abs('$fromLat')) * pi(
 $result = mysqli_query($mysqli, $query) or die(mysql_error());
 
 if (mysqli_num_rows($result) < 1){ 
-	sleep(5);
+	sleep(1);
  	echo false;
 }
 
@@ -23,7 +23,7 @@ else {
 	while($row = $result->fetch_assoc()) {
         	$DriverID = $row["DrivID"];
     }
-    $query = "UPDATE `trans` SET DrivID = '$DriverID' WHERE = CustID='$userID' AND State != 'b'";
+    $query = "UPDATE `trans` SET DrivID = '$DriverID' WHERE = CustID='$userID' AND State != 'e'";
     $result = mysqli_query($mysqli, $query) or die(mysql_error());
 
     $query = "SELECT * FROM `rdydriv` WHERE = DrivID = '$DriverID'";
