@@ -17,9 +17,7 @@ $result = mysqli_query($mysqli, $query) or die(mysql_error());
 if (mysqli_num_rows($result) < 1) { 
 	sleep(1);
 	echo false;
-}
-
-else {
+} else {
 
 	while($row = $result->fetch_assoc()) {
 	    $DriverID = $row["DrivID"];
@@ -28,7 +26,9 @@ else {
 	    $DriverLng= $row["lng"];
 	    $Distance = $row["distance"];
 	}
-
+	
+	echo false; //Testing
+	
 	$query = "SELECT * FROM `trans` WHERE CustID='$userID' AND State != 'e'";
 	$result = mysqli_query($mysqli, $query) or die(mysql_error());
 	if (mysqli_num_rows($result) > 0){ 
