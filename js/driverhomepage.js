@@ -424,24 +424,26 @@ function driverCancel(){
 	
 	//Call database through Ajax and remove from rdyDriv table and change trans table state code
 	
-  //clearInterval(timer);
+  //window.clearTimeout(timer);
+  //window.clearInterval(timer);
   //console.log("Testing function.");
-  driverAddress = "";
-  console.log("Random driver address set.");
+
+  console.log("Canceling driver action now...");
 
 	$.ajax({
       url: "php/driverCancel.php", 
       method: "post",
-      data: {driverAddress: driverAddress},
+      data: {},
       success: function(data){
-      	if(data != false)
-      	{          
-	      	console.log("Canceled successfully.");
-          console.log(data);
-      	}
-      	else {
-      		console.log("Cancel unsuccessful.");
-      	}
+        if(data != false)
+        {           
+		  console.log("Cancel successful");
+          console.log("Value: " + data);
+        }
+        else {
+          console.log("Cancel unsuccessful");
+		  console.log("Value: " + data);
+        }
       }
     });
 	
