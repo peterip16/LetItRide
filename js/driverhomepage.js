@@ -199,6 +199,7 @@ function displayDirections(data) {
 }
 
 function startService() {
+  console.log("Trying to start service.");
   navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
   if(serviceStatus == false) {
     serviceStatus = true;
@@ -413,6 +414,7 @@ function driverChangeRole(){
 	
 	driverCancel();
 	
+  console.log("Proceeding to change the page.");
 	//Code to change pages
 	
 }
@@ -422,17 +424,23 @@ function driverCancel(){
 	
 	//Call database through Ajax and remove from rdyDriv table and change trans table state code
 	
+  //clearInterval(timer);
+  //console.log("Testing function.");
+  driverAddress = "";
+  console.log("Random driver address set.");
+
 	$.ajax({
       url: "php/driverCancel.php", 
       method: "post",
-      data: {destAddress: destinationAddress},
+      data: {driverAddress: driverAddress},
       success: function(data){
       	if(data != false)
       	{          
-	      	console.log(data);
+	      	console.log("Canceled successfully.");
+          console.log(data);
       	}
       	else {
-      		console.log(data);
+      		console.log("Cancel unsuccessful.");
       	}
       }
     });
@@ -447,7 +455,7 @@ function driverCancel(){
 function driverSignOut(){
   
   driverCancel();
-  window.location = "signout.php";
+  window.location = "php/signout.php";
   //Code to destroy(?) session
   //Code to change current page to the index page 
   

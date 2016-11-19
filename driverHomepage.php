@@ -59,7 +59,7 @@
 				</div>
 				<div class="left_panel" id = "panel2">
 					<div class= "textLabel" id = "button2Label">
-						<button id = "quit" class="quit button"/>Change Role</button>
+						<button id = "quit" class="quit button" onclick = "driverChangeRole()"/>Change Role</button>
 					</div>
 					<div>
 					<button class="button" id = "sign_out" onclick = "driverSignOut()"/>Sign Out</button>
@@ -70,7 +70,11 @@
 				<div class= "textLabel" id = "button3Label">
 					<button id = "search" class="customer_search button" onclick = "driverConfirmedPickUp()"/>Confirm Picked Up</button>
 				</div>
+
 				<!--
+
+				// We decided not to let driver cancel the ride or sign-out during the ride.
+
 				<div class= "textLabel" id = "button4Label">
 					<button id = "cancel" class="quit button" onclick = "driverCancel()"/>Cancel</button>
 				</div>
@@ -78,12 +82,17 @@
 					<button class="button" id = "sign_out" onclick = "driverSignOut()"/>Sign Out</button>
 				</div>
 				-->
+
 			  </div>
 			  <div class="left_Panel" id = "thirdPanel">
 				<div class= "textLabel" id = "button5Label">
 					<button id = "search" class="customer_search button" onclick = "driverConfirmedEnd()"/>Confirm Ride End</button>
 				</div>
+
 				<!--
+
+				// We decided not to let driver cancel the ride or sign-out during the ride.
+
 				<div class= "textLabel" id = "button6Label">
 					<button id = "cancel" class="quit button" onclick = "driverCancel()"/>Cancel</button>
 				</div>
@@ -91,6 +100,7 @@
 					<button class="button" id = "sign_out" onclick = "driverSignOut()"/>Sign Out</button>
 					</div>
 					-->
+
 			  </div>
 	      </div>
 	    <!--</div>-->
