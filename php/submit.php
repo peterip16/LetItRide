@@ -21,17 +21,13 @@
 	$image = addslashes(file_get_contents($_FILES['profileImg']['tmp_name']));
 	
 	
-	// $image= addslashes(file_get_contents($_FILES['imgInp']['tmp_name']));
-	// $image_name = addslashes($_FILES['imgInp']['name']);
- //    $image_size = getimagesize($_FILES['imgInp']['tmp_name']);
+    if(empty($_FILES['profileImg']['name'])){
+    	mysql_query("UPDATE rut SET Email = '$email', Password = '$password' , Name = '$name', Phonenumber = '$phone'
+    	 WHERE UserID = '$userID'");
+    }else{
+    	mysql_query("UPDATE rut SET Email = '$email', Password = '$password' , Name = '$name', Phonenumber = '$phone', Image = '$image' WHERE UserID = '$userID'");
+    }
 
-// , Image = '$image'
-
-	// mysql_query("UPDATE rut image VALUES ('','dsfjisdfjs.jpg', '$image' )");
-
-	// mysql_query("UPDATE rut SET Image = '$image' WHERE UserID = 1");
-
-	mysql_query("UPDATE rut SET Email = '$email', Password = '$password' , Name = '$name', Phonenumber = '$phone', Image = '$image' WHERE UserID = '$userID'");
 	mysql_query("UPDATE cit SET CCnumber = '$ccard' WHERE UserID = '$userID'");
 
 
