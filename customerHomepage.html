@@ -61,15 +61,12 @@
         <li><a class = "profile" href="#profilePage"><img src="img/profile.png"
                         onMouseOver=src="img/profile_hover.png"
                         onMouseOut=src="img/profile.png"></a></li>
-        <li><a class = "history" href="#historyPage"><img src="img/history.png"
-                        onMouseOver=src="img/history_hover.png"
-                        onMouseOut=src="img/history.png"></a></li>
       </ul>
 
 
       <div class = "tab" id = "homePage">
           <div class="imagePanel">
-            <img class="profileImage" src = "php/getImage.php">
+            <img class="profileImage" src = "php/getImage.php" onerror="this.onerror=null;this.src='img/default.jpg';">
             <div class="textLabel" id="name">FirstName LastName</div>
           </div>
         
@@ -83,7 +80,8 @@
                 <div class="switch-btn"></div>
             </label>
             <button class="button button-block" id = "myLocation"  onclick="recentering()"/>My location</button>
-            <button class="button button-block" id="requestAride" onclick = "requestADriver()"/>Request A Ride</button>
+            <button class="button button-block" id= "requestAride" onclick = "requestADriver()"/>Request A Ride</button>
+            <a class="button button-block" id= "logout" href="php/logout.php" >Logout</a>
           </div>
 
         <div class = "directionPanel" >
@@ -91,7 +89,7 @@
                       onMouseOver=src="img/leftArrow_hover.png"
                       onMouseOut=src="img/leftArrow.png"></div>
           <div class="textLabel" id="timeAndDistance"></div>
-          <div id="dirctionDiscription"></div>
+          <button class="button button-block" id= "showDriverInfoAgain" onclick = "displayRequestDriver()"/>Driver Infomation</button>
         </div>
       </div>
 
@@ -138,9 +136,6 @@
           </form>
         </div>
 
-        <div class = "tab" id = "historyPage">
-      
-        </div>
     </div> 
 
     <div id="requestDriverScreen">

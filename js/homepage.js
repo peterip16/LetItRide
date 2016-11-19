@@ -40,25 +40,25 @@ var emulateDriver = false;
 var pathComplete = false;
 //MARKER FUNCTIONS//
 function clearDestinationMarkers() {
-	if(desitinationMarker != null){
-		desitinationMarker.setMap(null);
-	}
-	if(desitinationMarkers != null) {
-		desitinationMarkers.forEach(function(marker) {
-			marker.setMap(null);
-		});
-	}
+  if(desitinationMarker != null){
+    desitinationMarker.setMap(null);
+  }
+  if(desitinationMarkers != null) {
+    desitinationMarkers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+  }
 }
 
 function clearPickUpLocationMarkers() {
-	if(pickupLocationMarker != null){
-		pickupLocationMarker.setMap(null);
-	}
-	if(pickupLocationMarkers != null) {
-		pickupLocationMarkers.forEach(function(marker) {
-			marker.setMap(null);
-		});
-	}
+  if(pickupLocationMarker != null){
+    pickupLocationMarker.setMap(null);
+  }
+  if(pickupLocationMarkers != null) {
+    pickupLocationMarkers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+  }
 }
 
 //PLACE PICK UP MARKER
@@ -317,13 +317,18 @@ function foundDriver(id, name, phone, license, plate, model, time){
 
     var popUp = $('#requestDriverScreen');
     popUp.show();
+    calculateAndDisplayRoute();
   }
+}
+
+function displayRequestDriver(){
+  var popUp = $('#requestDriverScreen');
+  popUp.show();
 }
 
 function closeRequestDriver(){
   var popUp = $('#requestDriverScreen');
   popUp.hide();
-  calculateAndDisplayRoute();
 }
 
 function displayNoDriver(){
@@ -337,8 +342,8 @@ function closeNoDriver(){
 }
 
 function calculateAndDisplayRoute(){
-  $('#dirctionDiscription').empty();
-  directionsDisplay.setPanel(document.getElementById('dirctionDiscription'));
+  // $('#dirctionDiscription').empty();
+  // directionsDisplay.setPanel(document.getElementById('dirctionDiscription'));
   getTrafficPath(); //CALCULATE AND DISPLAYS PATH
   console.log("Service Started");
   timer = setTimeout(startService(), interval);
@@ -349,8 +354,8 @@ function calculateAndDisplayRoute(){
 function serviceCalculateRoute()
 {
   emulateDriver = true;
-  $('#dirctionDiscription').empty();
-  directionsDisplay.setPanel(document.getElementById('dirctionDiscription'));
+  // $('#dirctionDiscription').empty();
+  // directionsDisplay.setPanel(document.getElementById('dirctionDiscription'));
   getTrafficPath(); //CALCULATE AND DISPLAYS PATH
   clearPickUpLocationMarkers(); 
   clearDestinationMarkers();   
@@ -405,7 +410,7 @@ function displayDirections(data) {
   duration = (data.routes[fastestIndex].legs[0].duration_in_traffic.value / 60).toFixed(0);
 
   displayTimeDistance.innerHTML = "";
-  displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br/ >Duration: about" + duration +" minutes"
+  displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br />Duration: about " + duration +" minutes"
   var routename = data.routes[fastestIndex].summary; //USED CURRENTLY FOR COMPARE
   //console.log(routename);
   var date =  new Date();
@@ -426,7 +431,7 @@ function displayDirections(data) {
       //console.log(response.routes[i]);
       if(response.routes[i].summary == routename)
       {
-      	$('.inputPanel').hide();
+        $('.inputPanel').hide();
         $('.directionPanel').show();
         directionsDisplay.setDirections(response);
         directionsDisplay.setRouteIndex(i);
@@ -575,12 +580,12 @@ function startAnimation(index) {
 
 
 function recentering(){
-	clearPickUpLocationMarkers();
-	if (navigator.geolocation) {
-		if(userCurrMarker != null) userCurrMarker.setMap(null);
+  clearPickUpLocationMarkers();
+  if (navigator.geolocation) {
+    if(userCurrMarker != null) userCurrMarker.setMap(null);
 
-		navigator.geolocation.getCurrentPosition(setUserCurrentLocation);
-	}
+    navigator.geolocation.getCurrentPosition(setUserCurrentLocation);
+  }
 }
 function setUserCurrentLocation(position){
   if(userCurrMarker != null) userCurrMarker.setMap(null);
@@ -597,19 +602,19 @@ function setUserCurrentLocation(position){
             icon: 'https://i.imgur.com/mQ94NuU.png',
             zIndex: 0
           });
-	geocoder.geocode({'latLng': userCurrMarker.position}, function(results, status) {
-	if (status == google.maps.GeocoderStatus.OK) {
-		if (results[0]) {
-			fromAddress = results[0].formatted_address;
-			fromLng = userCurrMarker.position.lng();
-			fromLat = userCurrMarker.position.lat();
-			//console.log(fromAddress +fromLat +fromLng);
-			document.getElementById("from").placeholder = "";
-	//document.getElementById("from").value = "";
-	document.getElementById("from").value = fromAddress;
-		}
-	}
-	});
+  geocoder.geocode({'latLng': userCurrMarker.position}, function(results, status) {
+  if (status == google.maps.GeocoderStatus.OK) {
+    if (results[0]) {
+      fromAddress = results[0].formatted_address;
+      fromLng = userCurrMarker.position.lng();
+      fromLat = userCurrMarker.position.lat();
+      //console.log(fromAddress +fromLat +fromLng);
+      document.getElementById("from").placeholder = "";
+  //document.getElementById("from").value = "";
+  document.getElementById("from").value = fromAddress;
+    }
+  }
+  });
 }
 
 function desitination() {
@@ -630,8 +635,8 @@ function desitination() {
             return;
           }
           else if(places.length == 1){                            
-          	toAddress = places[0].formatted_address;
-          	toLng = places[0].geometry.location.lng();
+            toAddress = places[0].formatted_address;
+            toLng = places[0].geometry.location.lng();
             toLat = places[0].geometry.location.lat();
             //console.log(toLng+" "+toLat+" "+toAddress);
           }
@@ -702,13 +707,13 @@ function pickupLocation() {
         // more details for that place.
         searchBox.addListener('places_changed', function() {
           var places = searchBox.getPlaces();
-			    clearPickUpLocationMarkers();
+          clearPickUpLocationMarkers();
           if (places.length == 0) {
             return;
           }
           else if(places.length == 1) {
-          	fromAddress = places[0].formatted_address;
-          	fromLng = places[0].geometry.location.lng();
+            fromAddress = places[0].formatted_address;
+            fromLng = places[0].geometry.location.lng();
             fromLat = places[0].geometry.location.lat();
             //console.log(fromLng+" "+fromLat+" "+fromAddress);
           }
@@ -763,7 +768,7 @@ function pickupLocation() {
             }
           });
           map.fitBounds(bounds);
-      	}
+        }
         });
 }
 
@@ -790,7 +795,7 @@ function startService() {
       data: {fromAddress: fromAddress, fromLat: fromLat, fromLng: fromLng,toAddress: toAddress, toLat: toLat, toLng: toLng},
       success: function(data){
         if(data != false) {
-        	console.log("Driver Found");
+          console.log("Driver Found");
             clearTimeout(timer);
             timer = 0;
             
@@ -830,8 +835,8 @@ function waitForDriver() {
       success: function(data){
           if(data != true){
             //console.log(driverID);
-          	clearTimeout(timer);
-          	//console.log(data);
+            clearTimeout(timer);
+            //console.log(data);
             timer = setTimeout(waitForDriver(), interval);
             console.log("waiting");
             //later will track driver location and update marker

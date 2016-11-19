@@ -55,6 +55,13 @@
   top: 45%;
 }
 
+#showDriverInfoAgain{
+  /*width: 20%;*/
+  position: absolute;
+  left: 8%;
+  top: 70%;
+}
+
 #closeDriverInfo{
   width: 20%;
   position: absolute;
@@ -137,7 +144,7 @@
 
 }
 
-/*#dirctionDiscription{
+/*#timeAndDistance{
   background: white;
 }*/
 
@@ -219,7 +226,7 @@ input[type=checkbox]:checked + .switch-btn {
 
 #sclection div{
   position: absolute;
-  top: 65%;
+  top: 60%;
   left: 3%;
 }
 
@@ -261,18 +268,18 @@ input[type=checkbox]:checked + .switch-btn {
 
 #timeAndDistance{
   position: absolute;
-  top: 48%;
-  left: 6%;
+  top: 55%;
+  left: 7%;
 }
 
-#dirctionDiscription{
+/*#timeAndDistance{
   position: absolute;
   top: 54%;
   left: 3%;
   width: 24%;
   overflow: auto;
   max-height: 43%;
-}
+}*/
 
 .tabs{
       float: left;
@@ -337,8 +344,9 @@ input[type=checkbox]:checked + .switch-btn {
 
 
 #name{
+  width: 200px;
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 12%;
 }
 
@@ -360,13 +368,13 @@ input[type=checkbox]:checked + .switch-btn {
 
 #fromLabel{
   position: absolute;
-  top: 52%;
+  top: 40%;
   left: 3%;
 }
 
 #toLabel{
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 3%;
 }
 
@@ -397,9 +405,9 @@ body {
 
 #to {
         position: absolute;
-        left: 6%;
-        width: 20%;
-        top: 58%;
+        left: 2%;
+        width: 25%;
+        top: 52%;
   }
 
 
@@ -410,9 +418,9 @@ body {
 
 #from {
         position: absolute;
-        left: 6%;
-        width: 20% ; 
-        top: 50%;
+        left: 2%;
+        width: 25% ; 
+        top: 42%;
       }
 
 #from:focus {
@@ -423,15 +431,41 @@ body {
 
 #myLocation{
   position: absolute;
-  left: 10%;
-  top: 70%;
+  left: 9%;
+  top: 65%;
 }
       
 #requestAride{
   position: absolute;
-  left: 10%;
-  top: 80%;
+  left: 9%;
+  top: 75%;
 }
+
+#logout{
+  position: absolute;
+  left: 9%;
+  top: 85%;
+}
+
+
+#logout{
+
+  text-align: center;
+  text-decoration: none;
+}
+
+#logout: hover{
+  text-decoration: none;
+  color: white;
+}
+
+a:visited{
+  color:white;
+}
+a:hover{
+  color:white;
+}
+
 
 .button {
   border: 0;

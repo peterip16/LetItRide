@@ -3,7 +3,6 @@ var tabs = $('.tabs');
 var body = $('body');
 var homePage = $('#homePage');
 var profile = $('#profilePage');
-var history = $('#historyPage');
 
 var username = $('input[name = "usr"]');
 var password = $('input[name = "pwd"]');
@@ -117,22 +116,14 @@ $('.home').on('click',function(){
 	body.css("background-color","#1697d1");
 	homePage.show();
 	profile.hide();
-	history.hide();
 });
 
 $('.profile').on('click',function(){
 	body.css("background-color","#33434f");
 	homePage.hide();
 	profile.show();
-	history.hide();
 });
 
-$('.history').on('click',function(){
-	body.css("background-color","#ee2e24");
-	homePage.hide();
-	profile.hide();
-	history.show();
-});
 
 $('.goBack').on('click', function(){
 	$('.directionPanel').hide();
