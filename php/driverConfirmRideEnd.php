@@ -10,7 +10,7 @@ if (isset($_POST)) {
 	echo $query;
 	$result = mysqli_query($mysqli, $query) or die(mysql_error());
 	if (mysqli_num_rows($result) > 0){
-		$query = "UPDATE `trans` SET State='d' WHERE DrivID='$userID' AND CustID='$customerID' AND State='c'";
+		$query = "UPDATE `trans` SET State='e' WHERE DrivID='$userID' AND CustID='$customerID' AND State='c'";
 		$result = mysqli_query($mysqli, $query) or die(mysql_error());
 		if($result) {
 			echo true;
