@@ -113,34 +113,42 @@
             </div>
             <div class="form-group">
               <label for="pwd" class = "textLabel"  >Password:</label>
-              <input type="password" class="form-control" name="pwd">
+              <input type="password" class="form-control" name="pwd" id = "pwd" pattern=".{1,30}$" required
+              onchange=" form.pwd2.pattern = this.value;" />
             </div>
 
             <div class="form-group">
               <label for="pwd2" class = "textLabel"  >Confirm Password:</label>
-              <input type="password" class="form-control" name="pwd2">
+              <input type="password" class="form-control" name="pwd2" " id = "pwd2" pattern=".{1,30}$" required 
+              onchange=" this.pattern = form.pwd.value;"
+              oninvalid="setCustomValidity('Passwords do not match')"
+              oninput="setCustomValidity('')" />
             </div>
 
             <div class="form-group">
               <label for="email" class = "textLabel" >Email:</label>
-              <input type="email" class="form-control" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+              <input type="email" class="form-control" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required
               oninvalid="setCustomValidity('Invalid email address')"
               oninput="setCustomValidity('')" />
             </div>
 
             <div class="form-group">
               <label for="phone" class = "textLabel" >Phone:</label>
-              <input type="text" class="form-control" name = "phone" pattern="[0-9]+$"
+              <input type="text" class="form-control" name = "phone" pattern="[0-9]+$" required
                 oninvalid="setCustomValidity('Invalid phone number')"
                 oninput="setCustomValidity('')" />
             </div>
 
             <div class="form-group">
               <label for="ccard" class = "textLabel" >Credit Card:</label>
-              <input type="text" class="form-control" name = "ccard" pattern="[0-9]+$" 
+              <input type="text" class="form-control" name = "ccard" pattern="[0-9]+$" required 
                 oninvalid="setCustomValidity('Invalid credit card number')"
                 oninput="setCustomValidity('')" />
             </div>
+
+            <!-- <input id="password" name="password" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Password" required>
+
+            <input id="password_two" name="password_two" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="Verify Password" required> -->
 
             <!-- <input type="text" id="inputTell" class="bfh-phone" data-format="(ddd) ddd-dddd"> -->
             
