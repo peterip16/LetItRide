@@ -309,7 +309,7 @@ function foundDriver(id, name, phone, license, plate, model, time){
 
     var popUp = $('#requestDriverScreen');
     popUp.show();
-    //calculateAndDisplayRoute();
+    calculateAndDisplayRoute();
   }
 }
 
@@ -458,9 +458,11 @@ function displayDirections(data) {
   var displayTimeDistance = document.getElementById("timeAndDistance");
   distance = (data.routes[fastestIndex].legs[0].distance.value * 0.000621371).toFixed(1);
   duration = (data.routes[fastestIndex].legs[0].duration_in_traffic.value / 60).toFixed(0);
+  var fare = (Number(distance) < 3) ? 5 : (Number(distance) - 3 ) * 2 + 5;
+  fare = fare.toFixed(2);
 
   displayTimeDistance.innerHTML = "";
-  displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br />Duration: about " + duration +" minutes"
+  displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br />Duration: " + duration +" mins<br />Cost: $" + fare;
   var routename = data.routes[fastestIndex].summary; //USED CURRENTLY FOR COMPARE
   //console.log(routename);
   var date =  new Date();
