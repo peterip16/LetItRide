@@ -1,6 +1,3 @@
-/*.no-js #loader { display: none;  }
-.js #loader { display: block; position: absolute; left: 100px; top: 0; }*/
-
 
 #diverName{
   width: 40%;
@@ -71,6 +68,45 @@
   left: 40%;
   top: 85%;
 }
+
+#promptUserEnterDestinationAndPickupLocationScreen{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  line-height: 100%;
+  z-index: 2;
+  background-color: rgba(0,0,0,0.7);
+  display: none;
+}
+
+.enterDAndP{
+  width: 400px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  margin-top:-50px;
+  left: 50%;
+  margin-left: -200px;
+  background: #1697d1;
+  z-index: 3;
+  border-radius: 15px;
+}
+
+.DAndP{
+  
+  width: 400px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  margin-top:-40px;
+  left: 50%;
+  margin-left: -200px;
+  text-align:center;
+
+}
+
 
 #noDriverScreen{
   position: fixed;

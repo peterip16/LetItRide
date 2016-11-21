@@ -212,72 +212,63 @@ function calculateEachDriver(driver){
             });
 }
 
+function closeDAndP(){
+  $("#promptUserEnterDestinationAndPickupLocationScreen").hide();
+}
+
 function requestADriver(){
-      // alert("hello");
+      var frm = document.getElementById("from");
+      var to = document.getElementById("to");
+      // alert(to.value.length == 0);
 
-      // var popUp = document.getElementById("noDriverScreen");
+      if(frm.value.length == 0 || to.value.length == 0){
+          $("#promptUserEnterDestinationAndPickupLocationScreen").show();
+      }else{
 
 
+        $.getJSON('php/requestDrive.php', function(data){
+
+        var waitingTime = 999999;
+        var time;
+        // var j = 0;
+        var driverIndex;
+        if(data.result.length > 0) {
+          // alert(data.result.length );
+
+          arr = [];
+          for(i = 0; i < data.result.length; i++){
+
+            calculateEachDriver(data.result[i]);
+
+          }
+          setTimeout(function(){ 
+              if(arr.length > 0){
+                for(i = 0; i < arr.length; i++){
       
-      // popUp.style.display("block");
+                  if(arr[i].time < waitingTime){
+                    waitingTime = arr[i].time;
+                    driverIndex = i;
+                  }
+                }
+                foundDriver(arr[driverIndex].id, arr[driverIndex].name, arr[driverIndex].phone, 
+                        arr[driverIndex].license, arr[driverIndex].plate, arr[driverIndex].model, arr[driverIndex].time);
+              }else{
+                displayNoDriver();
+              }
 
 
-      $.getJSON('php/requestDrive.php', function(data){
-
-        // alert(data.result.length);
-      // $.each(data.result, function(){
-      
-      // var driverId;
-      var waitingTime = 999999;
-      var time;
-      // var j = 0;
-      var driverIndex;
-      if(data.result.length > 0) {
-        // alert(data.result.length );
-
-        arr = [];
-        for(i = 0; i < data.result.length; i++){
-
-          calculateEachDriver(data.result[i]);
+              }, 500);
 
         }
-        // alert(arr[0]);
-        // setTimeout(alert(arr[0]), 5000);
-        setTimeout(function(){ 
-            // alert(arr.length );
-            if(arr.length > 0){
-              for(i = 0; i < arr.length; i++){
-                // alert(arr[i].wtime);
-                if(arr[i].time < waitingTime){
-                  waitingTime = arr[i].time;
-                  driverIndex = i;
-                }
-              }
-              foundDriver(arr[driverIndex].id, arr[driverIndex].name, arr[driverIndex].phone, 
-                      arr[driverIndex].license, arr[driverIndex].plate, arr[driverIndex].model, arr[driverIndex].time);
-            }else{
-              displayNoDriver();
-            }
+       else{
+          displayNoDriver();
+       }
 
+       
 
-            }, 500);
-
-
-        
-        
-
-
-
-      }
-     else{
-        displayNoDriver();
-     }
-
-     // alert(j);
-
-    });
-
-    // alert(j);
+      });
+    
+  }
 
 }
 
