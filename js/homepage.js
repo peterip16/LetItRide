@@ -35,7 +35,7 @@ var poly = null;
 var startLocation = [];
 var endLocation = [];
 var timerHandle = [];
-var ditance, duration;
+var distance, duration;
 var emulateDriver = false;
 var pathComplete = false;
 var routeNumber = 0;
@@ -875,7 +875,7 @@ function startService() {
           driverLicense = driverData.license;
           driverPlate = driverData.plate;
           driverModel = driverData.model;
-          foundDriver(driverID, driverName, driverPhone, driverLicense, driverPlate, driverModel, distance);
+          foundDriver(driverID, driverName, driverPhone, driverLicense, driverPlate, driverModel, duration);
           serviceCalculateRoute();
           timer =setTimeout(waitForDriver(), interval); //Begin waiting for driver
       }

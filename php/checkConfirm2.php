@@ -13,6 +13,7 @@ if (isset($_POST)) {
 		echo true;
 	} 
 	else {
+		sleep(2);
 		echo false;
 	}
 }

@@ -3,7 +3,7 @@ session_start();
 require 'connection.php';
 
 if (isset($_POST)) {
-	sleep(3);
+	sleep(2);
 	$driverID= $_POST['driverID'];
 	$userID = $_SESSION['UserID'];
 	
