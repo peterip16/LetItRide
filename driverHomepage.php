@@ -58,9 +58,11 @@
 					<button id = "search" class="customer_search button" onclick = "startService()"/>Look for customer</button>
 				</div>
 				<div class="left_panel" id = "panel2">
+				<!--
 					<div class= "textLabel" id = "button2Label">
 						<button id = "quit" class="quit button" onclick = "driverChangeRole()"/>Change Role</button>
 					</div>
+					-->
 					<div>
 					<button class="button" id = "sign_out" onclick = "driverSignOut()"/>Sign Out</button>
 					</div>
