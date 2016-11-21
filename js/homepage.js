@@ -309,7 +309,7 @@ function foundDriver(id, name, phone, license, plate, model, time){
 
     var popUp = $('#requestDriverScreen');
     popUp.show();
-    calculateAndDisplayRoute();
+    //calculateAndDisplayRoute();
   }
 }
 
