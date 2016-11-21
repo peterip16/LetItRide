@@ -56,7 +56,7 @@ else
 {
   $_SESSION['error'] = "Invalid login credentials";
   echo "<script type='text/javascript'>alert('Invalid login credentials! Please try again. ')</script>";
-  header( "refresh:0; url=index.html" );
+  header( "refresh:0; url=login.html" );
 
 }
   

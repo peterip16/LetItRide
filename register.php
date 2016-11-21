@@ -16,51 +16,51 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['name'])
   if (empty($name) AND empty($password) AND empty($email))
 {
 echo "<script type='text/javascript'>alert('Please enter a Name, email and password!')</script>";
-  header( "refresh:0; url=index.html" );
+  header( "refresh:0; url=login.html" );
   exit;
 }
 
 if (empty($name) AND empty($password))
 {
 echo "<script type='text/javascript'>alert('Please enter a Name and password!')</script>";
-  header( "refresh:0; url=index.html" );
+  header( "refresh:0; url=login.html" );
   exit;
 }
 if (empty($name) AND empty($email))
 {
 echo "<script type='text/javascript'>alert('Please enter a Name and email!')</script>";
-  header( "refresh:0; url=index.html" );
+  header( "refresh:0; url=login.html" );
   exit;
 }
 if (empty($email) AND empty($password))
 {
 echo "<script type='text/javascript'>alert('Please enter a Email and password!')</script>";
-  header( "refresh:0; url=index.html" );
+  header( "refresh:0; url=login.html" );
   exit;
 }
 
 if (empty($email))
 {
    echo "<script type='text/javascript'>alert('Please enter an email!')</script>";
-  header( "refresh:0; url=index.html" );
+  header( "refresh:0; url=login.html" );
   exit;
 }
 if (empty($password))
 {
    echo "<script type='text/javascript'>alert('Please enter an Password!')</script>";
-  header( "refresh:0; url=index.html" );
+  header( "refresh:0; url=login.html" );
   exit;
 }
 if (empty($name))
 {
    echo "<script type='text/javascript'>alert('Please enter an Name!')</script>";
-  header( "refresh:0; url=index.html" );
+  header( "refresh:0; url=login.html" );
   exit;
 }
   if (mysqli_num_rows($result) > 0){ 
     $_SESSION['error'] = "User already exists";
     echo "<script type='text/javascript'>alert('Email already Exists!')</script>";
-  header( "refresh:0; url=index.html" );
+  header( "refresh:0; url=login.html" );
 
 
   }
@@ -73,7 +73,7 @@ if (empty($name))
     if ($result){
       $_SESSION['email'] = $email;
       echo "<script type='text/javascript'>alert('Successfully Registered!')</script>";
-  header( "refresh:0; url=index.html" );
+  header( "refresh:0; url=login.html" );
  
 
       }

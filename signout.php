@@ -4,5 +4,5 @@ session_start();
 session_unset();
 session_destroy();
 
-header( "refresh:0; url=index.html" );
+header( "refresh:0; url=login.html" );
 ?>
