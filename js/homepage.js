@@ -219,7 +219,6 @@ function closeDAndP(){
 function requestADriver(){
       var frm = document.getElementById("from");
       var to = document.getElementById("to");
-      // alert(to.value.length == 0);
 
       if(frm.value.length == 0 || to.value.length == 0){
           $("#promptUserEnterDestinationAndPickupLocationScreen").show();
@@ -338,17 +337,17 @@ function calculateAndDisplayRoute(){
   emulateDriver = false;
   // $('#dirctionDiscription').empty();
   // directionsDisplay.setPanel(document.getElementById('dirctionDiscription'));
-	  //console.log(toAddress);
-	  //console.log(fromAddress);     
-	  //var zipcode = toAddress.split(",");
-	  //zipcode = zipcode[2].split(" ");
-	 //  if(zipcodes.indexOf(parseFloat(zipcode[2])) > -1) {  
-	 //  	  console.log("Service Started");
-		//   getTrafficPath();
-		//   timer = setTimeout(startService(), interval);
-		//   clearPickUpLocationMarkers(); 
-		//   clearDestinationMarkers();  
-	 //  }
+    //console.log(toAddress);
+    //console.log(fromAddress);     
+    //var zipcode = toAddress.split(",");
+    //zipcode = zipcode[2].split(" ");
+   //  if(zipcodes.indexOf(parseFloat(zipcode[2])) > -1) {  
+   //     console.log("Service Started");
+    //   getTrafficPath();
+    //   timer = setTimeout(startService(), interval);
+    //   clearPickUpLocationMarkers(); 
+    //   clearDestinationMarkers();  
+   //  }
   // else alert("Destination must be within Bay Area");
   if(serviceStatus == false)
   {
@@ -400,10 +399,10 @@ function checkDistance() {
       //console.log(JSON.parse(result));
       var data = JSON.parse(result);
       if((data.routes[0].legs[0].distance.value * 0.000621371).toFixed(1) < 90)
-	  {
-	  	  //console.log(data.routes[0].legs[0].distance.value * 0.000621371).toFixed(1);
-	  	  check = true;
-	  }
+    {
+        //console.log(data.routes[0].legs[0].distance.value * 0.000621371).toFixed(1);
+        check = true;
+    }
     },
     error: function (xhr, ajaxOptions, thrownError) {
       console.log(thrownError);
@@ -434,7 +433,7 @@ function getTrafficPath() {
     },
     success: function (result) {
       //console.log(JSON.parse(result));
-	  displayDirections(JSON.parse(result));
+    displayDirections(JSON.parse(result));
     },
     error: function (xhr, ajaxOptions, thrownError) {
       console.log(thrownError);
