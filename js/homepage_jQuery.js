@@ -13,8 +13,29 @@ var ccard = $('input[name = "ccard"]');
 
 var button = $('#sumbitButton');
 
+var frm = $('#from');
+var to = $('#to');
+
+frm.keyup( function(){
+	if( !$(this).val().trim() ){
+		$(this).css("background", "pink");
+	}else{
+		$(this).css("background", "white");
+	}
+});
+
+to.keyup( function(){
+	if( !$(this).val().trim() ){
+		$(this).css("background", "pink");
+	}else{
+		$(this).css("background", "white");
+	}
+});
+
 ccard.keyup( function(){
-	if( !$(this).val() ){
+	var num = /^\b[0-9]+\b$/i
+	var value = $(this).val();
+	if( !$(this).val() || !num.test(value) ){
 		$(this).css("background", "pink");
 	}else{
 		$(this).css("background", "white");
@@ -51,7 +72,9 @@ password.keyup( function(){
 });
 
 phone.keyup(function(){
-	if( !$(this).val() ){
+	var phone = /^\b[0-9]+\b$/i
+	var value = $(this).val();
+	if( !$(this).val() || !phone.test(value)){
 		$(this).css("background", "pink");
 	}else{
 		$(this).css("background", "white");
