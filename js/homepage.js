@@ -334,6 +334,12 @@ function closeNoDriver(){
 }
 
 function calculateAndDisplayRoute(){
+  var frm = document.getElementById("from");
+      var to = document.getElementById("to");
+
+      if(frm.value.length == 0 || to.value.length == 0){
+          $("#promptUserEnterDestinationAndPickupLocationScreen").show();
+      }else{
   emulateDriver = false;
   // $('#dirctionDiscription').empty();
   // directionsDisplay.setPanel(document.getElementById('dirctionDiscription'));
@@ -366,6 +372,7 @@ function calculateAndDisplayRoute(){
   else {
     alert("Service Started Already");
   }
+}
 }
 
 function serviceCalculateRoute()
@@ -458,7 +465,7 @@ function displayDirections(data) {
   var displayTimeDistance = document.getElementById("timeAndDistance");
   distance = (data.routes[fastestIndex].legs[0].distance.value * 0.000621371).toFixed(1);
   duration = (data.routes[fastestIndex].legs[0].duration_in_traffic.value / 60).toFixed(0);
-  var fare = (Number(distance) < 3) ? 5 : (Number(distance) - 3 ) * 2 + 5;
+  var fare = Number(distance)  + 5;
   fare = fare.toFixed(2);
 
   displayTimeDistance.innerHTML = "";

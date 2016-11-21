@@ -7,8 +7,8 @@ html {
 }
 
 body {
-  background: #c1bdba;
-  background-image: url("Background.jpg");
+  background: black;
+  /*background-image: url("Background.jpg");*/
   font-family: 'Titillium Web', sans-serif;
 }
 
