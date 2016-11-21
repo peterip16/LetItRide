@@ -22,7 +22,7 @@ var destinationAddress;
 var toAddress;
 var userAddress;
 var userID
-var driverID;
+var driverID, driverAddress, driverName, driverPhone, driverPlate, driverModel, driverLicense;
 //SERVICE
 var serviceStatus = false;
 var interval = 5000;
@@ -319,7 +319,7 @@ function foundDriver(id, name, phone, license, plate, model, time){
 
     var popUp = $('#requestDriverScreen');
     popUp.show();
-    calculateAndDisplayRoute();
+    //calculateAndDisplayRoute();
   }
 }
 
@@ -344,6 +344,7 @@ function closeNoDriver(){
 }
 
 function calculateAndDisplayRoute(){
+  emulateDriver = false;
   // $('#dirctionDiscription').empty();
   // directionsDisplay.setPanel(document.getElementById('dirctionDiscription'));
 	  //console.log(toAddress);
@@ -358,15 +359,22 @@ function calculateAndDisplayRoute(){
 		//   clearDestinationMarkers();  
 	 //  }
   // else alert("Destination must be within Bay Area");
-  if(checkDistance()) {
-	console.log("Service Started");
-	getTrafficPath();
-	timer = setTimeout(startService(), interval);
-	clearPickUpLocationMarkers(); 
-	clearDestinationMarkers();  
+  if(serviceStatus == false)
+  {
+    if(checkDistance()) {
+        console.log("Service Starting");
+        serviceStatus = true;
+        getTrafficPath();
+        timer = setTimeout(startService(), interval);
+        clearPickUpLocationMarkers(); 
+        clearDestinationMarkers();  
+    }
+    else {
+      alert("Destination must be within Bay Area");
+    }
   }
   else {
-  	alert("Destination must be within Bay Area");
+    alert("Service Started Already");
   }
 }
 
@@ -841,45 +849,45 @@ function storeLongLat()
 
 //START SERVICE FOR CUSTOMER
 function startService() {
-  console.log("starting service");
-  if(serviceStatus == false) {
-    serviceStatus = true;
-    $.ajax({
-      url: "php/addCustomer.php", 
-      method: "post",
-      data: {fromAddress: fromAddress, fromLat: fromLat, fromLng: fromLng,toAddress: toAddress, toLat: toLat, toLng: toLng},
-      success: function(data){
-        if(data != false) {
-          console.log("Driver Found");
-            clearTimeout(timer);
-            timer = 0;
-            
-            driverData = jQuery.parseJSON(data); 
-            //console.log(driverData);
-            driverID = driverData.driverID;
-            //console.log(driverID);
-            driverLng = driverData.driverLng;
-            driverLat = driverData.driverLat;
-            driverAddress = driverData.driverAddress;
-            myAddress = fromAddress;
-            destinationAddress = toAddress;
-            toAddress = fromAddress;
-            fromAddress = driverAddress;
-            //console.log(destinationAddress);
-            serviceCalculateRoute();
-            timer =setTimeout(waitForDriver(), interval); //Begin waiting for driver
-        }
-        else {
+  $.ajax({
+    url: "php/addCustomer.php", 
+    method: "post",
+    data: {fromAddress: fromAddress, fromLat: fromLat, fromLng: fromLng,toAddress: toAddress, toLat: toLat, toLng: toLng},
+    success: function(data){
+      if(data != false) {
+        console.log("Driver Found");
           clearTimeout(timer);
           timer = 0;
-          serviceStatus = false;
-          console.log("Finding Driver");
-          timer = setTimeout(startService(), interval); //Else continue finding a driver
-        }
+
+          //Driver information
+          driverData = jQuery.parseJSON(data); 
+          driverID = driverData.driverID;
+          driverLng = driverData.driverLng;
+          driverLat = driverData.driverLat;
+          driverAddress = driverData.driverAddress;
+
+          myAddress = fromAddress;
+          destinationAddress = toAddress;
+          toAddress = fromAddress;
+          fromAddress = driverAddress;
+
+          driverName = driverData.name;
+          driverPhone = driverData.phone;
+          driverLicense = driverData.license;
+          driverPlate = driverData.plate;
+          driverModel = driverData.model;
+          foundDriver(driverID, driverName, driverPhone, driverLicense, driverPlate, driverModel, distance);
+          serviceCalculateRoute();
+          timer =setTimeout(waitForDriver(), interval); //Begin waiting for driver
       }
-    });
-    
-  }
+      else {
+        clearTimeout(timer);
+        timer = 0;
+        console.log("Finding Driver");
+        timer = setTimeout(startService(), interval); //Else continue finding a driver
+      }
+    }
+  });
 }
 
 function waitForDriver() {
@@ -913,6 +921,7 @@ function waitForDriver() {
       }
 });
 }
+
 function waitForConfirmation() {
    $.ajax({
       url: "php/checkConfirm2.php", 
