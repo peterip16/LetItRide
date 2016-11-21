@@ -80,7 +80,7 @@
                 <div class="switch-btn"></div>
             </label>
             <button class="button button-block" id = "myLocation"  onclick="recentering()"/>My location</button>
-            <button class="button button-block" id= "requestAride" onclick = "requestADriver()"/>Request A Ride</button>
+            <button class="button button-block" id= "requestAride" onclick = "calculateAndDisplayRoute()"/>Request A Ride</button>
             <a class="button button-block" id= "logout" href="php/logout.php" >Logout</a>
           </div>
 
@@ -195,10 +195,9 @@
     <div>
 
     <script src="js/homepage_jQuery.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZH1m8DpmJxoEb-708cFe9u9rBFn_4B9g&libraries=places,geometry,drawing&callback=initMap" async></script>
-    <script src="js/v3_epoly.js" async></script>
     <script type="text/javascript" src="js/homepage.js"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZH1m8DpmJxoEb-708cFe9u9rBFn_4B9g&libraries=places,geometry,drawing&callback=initMap"></script>
+    <script src="js/v3_epoly.js" defer></script>
     
 
   </body>
