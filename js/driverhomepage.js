@@ -98,8 +98,8 @@ function getTrafficPath() {
 }
 
 function displayDirections(data) {
-  console.log("Displaying directions\n");
   var i = data.routes.length;
+  console.log("Displaying directions\n");
   //console.log("# of routes: " +i);
   var fastestIndex = 0;
   var fastestPath = data.routes[i-1].legs[0].duration_in_traffic.value;
@@ -392,11 +392,14 @@ function driverConfirmedPickUp(){
 function driverConfirmedEnd(){
   //This section is for code to change status of the ride in trans table. Need to confirm what code to use first
   //console.log("Attempting to change status of ride to end");
+  
+  var fare = Math.round(5.0 + (distance));
+	console.log("Calculated fare: " + fare);
  if(pathComplete == true) {
   $.ajax({
       url: "php/driverConfirmRideEnd.php", 
       method: "post",
-      data: {customerID: customerID},
+      data: {customerID: customerID, fare: fare},
       success: function(data){
         if(data == false)
         {           
@@ -465,7 +468,7 @@ function driverCancel(){
 function driverSignOut(){
   
   driverCancel();
-  window.location = "php/signout.php";
+  window.location = "signout.php";
   //Code to destroy(?) session
   //Code to change current page to the index page 
   
@@ -544,7 +547,7 @@ function animate(index,d) {
 function startAnimation(index) {
   tick = (distance*1609.34)/(duration*60000);
   console.log(tick);
-  step = tick*4;
+  step = tick*100;
   console.log(tick);
   console.log("start animation");
         if (timerHandle[index]) clearTimeout(timerHandle[index]);

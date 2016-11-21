@@ -6,7 +6,7 @@
 
 	
 	$userID = $_SESSION['UserID'];
-	$query = mysql_query("SELECT * FROM rut WHERE UserID = '$userID'");
+	$query = mysql_query("SELECT Email, Password, Name, Phonenumber, Ccnumber FROM rut join cit using (UserID) WHERE UserID = '$userID'");
 
 	// $numrows = mysql_num_rows($query);
 
@@ -25,10 +25,11 @@
 	$result = array();
 	// $row = mysql_fetch_array($query);
 	while($row = mysql_fetch_array($query)){
-		array_push($result, array('email' => $row[1],
-								  'password' => $row[2],
-								  'name' => $row[3],
-								  'phone' => $row[4]));
+		array_push($result, array('email' => $row[0],
+								  'password' => $row[1],
+								  'name' => $row[2],
+								  'phone' => $row[3],
+								  'ccard' => $row[4]));
 		// $result[] = $row;
 
 		// 'image' => $row[5]

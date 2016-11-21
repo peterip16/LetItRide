@@ -9,8 +9,17 @@ var password = $('input[name = "pwd"]');
 var password2 = $('input[name = "pwd2"]');
 var email = $('input[name = "email"]');
 var phone = $('input[name = "phone"]');
+var ccard = $('input[name = "ccard"]');
 
 var button = $('#sumbitButton');
+
+ccard.keyup( function(){
+	if( !$(this).val() ){
+		$(this).css("background", "pink");
+	}else{
+		$(this).css("background", "white");
+	}
+});
 
 password2.keyup( function(){
 	if( !$(this).val() ){
@@ -88,6 +97,7 @@ $(document).ready(function() {
 			var pass = data.result[0]['password'];
 			var emil = data.result[0]['email'];
 			var phn = data.result[0]['phone'];
+			var ccd = data.result[0]['ccard'];
 			// alert(pass);
 
 			text.html(nme);
@@ -96,6 +106,7 @@ $(document).ready(function() {
 			password2.val(pass);
 			email.val(emil);
 			phone.val(phn);
+			ccard.val(ccd);
 
 		});
 

@@ -107,8 +107,8 @@
 	    
 
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZH1m8DpmJxoEb-708cFe9u9rBFn_4B9g&libraries=places&callback=initMap"
-	         async defer></script>
-		<script src="http://www.geocodezip.com/scripts/v3_epoly.js" async defer></script>
+	         ></script>
+		<script src="http://www.geocodezip.com/scripts/v3_epoly.js" defer></script>
 	    <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
 

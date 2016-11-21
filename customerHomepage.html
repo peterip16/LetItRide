@@ -55,10 +55,10 @@
 
   
       <ul class="tabs">
-        <li><a class = "home" href="#homePage""><img src="img/home.png" 
+        <li><a class = "home" href="#homePage"" title="home" ><img src="img/home.png" 
                         onMouseOver=src="img/home_hover.png"
                         onMouseOut=src="img/home.png"></a></li>
-        <li><a class = "profile" href="#profilePage"><img src="img/profile.png"
+        <li><a class = "profile" href="#profilePage" title="Profile" ><img src="img/profile.png"
                         onMouseOver=src="img/profile_hover.png"
                         onMouseOut=src="img/profile.png"></a></li>
       </ul>
@@ -80,7 +80,7 @@
                 <div class="switch-btn"></div>
             </label>
             <button class="button button-block" id = "myLocation"  onclick="recentering()"/>My location</button>
-            <button class="button button-block" id= "requestAride" onclick = "requestADriver()"/>Request A Ride</button>
+            <button class="button button-block" id= "requestAride" onclick = "calculateAndDisplayRoute()"/>Request A Ride</button>
             <a class="button button-block" id= "logout" href="php/logout.php" >Logout</a>
           </div>
 
@@ -97,7 +97,7 @@
           <form id = "profileInput" action ="php/submit.php" method = "post" enctype="multipart/form-data">
             <div class="form-group" >
               <input type='file'  id="imgInp" name = "profileImg"onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
-          <img id="blah" class = "selectImage" src = "php/getImage.php">
+          <img id="blah" class = "selectImage" src = "php/getImage.php" onerror="this.onerror=null;this.src='img/default.jpg';">
             <div class="upload"> 
               <img src="img/upload.png"
                         onMouseOver=src="img/upload_hover.png"
@@ -105,28 +105,33 @@
                  </div>
             </div>
 
-            <div class="form-group" id = "nme">
+            <div class="form-group">
               <label for="usr" class = "textLabel" >Name:</label>
               <input type="text" class="form-control" name="usr">
             </div>
-            <div class="form-group" id = "pss">
+            <div class="form-group">
               <label for="pwd" class = "textLabel"  >Password:</label>
               <input type="password" class="form-control" name="pwd">
             </div>
 
-            <div class="form-group" id = "pss2" >
+            <div class="form-group">
               <label for="pwd2" class = "textLabel"  >Confirm Password:</label>
               <input type="password" class="form-control" name="pwd2">
             </div>
 
-            <div class="form-group" id= emil>
+            <div class="form-group">
               <label for="email" class = "textLabel" >Email:</label>
               <input type="email" class="form-control" name="email">
             </div>
 
-            <div class="form-group" id= emil>
+            <div class="form-group">
               <label for="phone" class = "textLabel" >Phone:</label>
               <input type="text" class="form-control" name = "phone">
+            </div>
+
+            <div class="form-group">
+              <label for="ccard" class = "textLabel" >Credit Card:</label>
+              <input type="text" class="form-control" name = "ccard">
             </div>
 
             <!-- <input type="text" id="inputTell" class="bfh-phone" data-format="(ddd) ddd-dddd"> -->
@@ -174,10 +179,9 @@
     <div>
 
     <script src="js/homepage_jQuery.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZH1m8DpmJxoEb-708cFe9u9rBFn_4B9g&libraries=places,geometry,drawing&callback=initMap" async></script>
-    <script src="js/v3_epoly.js" async></script>
     <script type="text/javascript" src="js/homepage.js"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZH1m8DpmJxoEb-708cFe9u9rBFn_4B9g&libraries=places,geometry,drawing&callback=initMap"></script>
+    <script src="js/v3_epoly.js" defer></script>
     
 
   </body>
