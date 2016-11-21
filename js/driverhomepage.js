@@ -81,7 +81,7 @@ function getTrafficPath() {
             '&destination='+temptoAddress+'&departure_time=now&mode=driving&alternatives=true&travel_model=optimistic&key=AIzaSyCprZ188mVif2fk-gao8Tv3glyWkLaM59E';
   $.ajax({
     url: 'php/proxy.php',
-    async:false,
+    async:true,
     type: "POST",
     dataType: "json",
     data: {
