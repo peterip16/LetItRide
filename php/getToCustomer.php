@@ -20,15 +20,16 @@ $result = mysqli_query($mysqli, $query) or die(mysql_error());
 
 //DEAULT DISTANCE RANGE < 0.05 
 
-$query = "SELECT *, 3956 * 2 * ASIN(SQRT(POWER(SIN(($drivLat - abs($custLat)) * pi()/180 / 2), 2) +  COS($drivLat * pi()/180 ) * COS(abs($custLng) * pi()/180) *  POWER(SIN(($drivLng - $custLng) * pi()/180 / 2), 2) )) AS distance FROM `trans` WHERE DrivID ='$userID' AND (State = 'a' OR State = 'c') AND CustID = '$custID' having distance < 1.05 or distance IS NULL";
+//$query = "SELECT *, 3956 * 2 * ASIN(SQRT(POWER(SIN(($drivLat - abs($custLat)) * pi()/180 / 2), 2) +  COS($drivLat * pi()/180 ) * COS(abs($custLng) * pi()/180) *  POWER(SIN(($drivLng - $custLng) * pi()/180 / 2), 2) )) AS distance FROM `trans` WHERE DrivID ='$userID' AND (State = 'a' OR State = 'c') AND CustID = '$custID' having distance < 1.05 or distance IS NULL";
 //echo $query;
-$result = mysqli_query($mysqli, $query) or die(mysql_error());
-if (mysqli_num_rows($result) > 0){ 
+//$result = mysqli_query($mysqli, $query) or die(mysql_error());
+
+//if (mysqli_num_rows($result) > 0){ 
 	$query = "UPDATE `trans` SET State = 'c' WHERE DrivID ='$userID' AND (State = 'a' OR State = 'c') AND CustID = '$custID'";
 	$result = mysqli_query($mysqli, $query) or die(mysql_error());
  	echo true;
-}
-else echo false;
+//}
+//else echo false;
 // $query = "SELECT * from trans WHERE CustID = '$custID' AND State = 'a'";
 // $result = mysqli_query($mysqli, $query) or die(mysql_error());
 // while($row = $result->fetch_assoc()) {
@@ -39,5 +40,5 @@ else echo false;
 
 //echo $query;
 
-sleep(1);
+//sleep(1);
 echo false;
