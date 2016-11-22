@@ -271,6 +271,7 @@ function getToCustomer() {
       method: "post",
       data: {customerID: customerID, driverLng: driverLng, driverLat: driverLat, driverAddress: driverAddress, customerLat: customerLat, customerLng : customerLng, custAddress: customerAddress},
       success: function(data) {
+		  console.log(data);
           if(data != true){
             console.log("Getting to customer");
             //console.log(data);
@@ -526,6 +527,7 @@ function createMarker(latlng, label, html) {
 
 function animate(index,d) {
   //console.log("animate"+index+" "+d);
+  console.log("d: " + d + " eol[index]: " + eol[index]);
    if (d>eol[index]) {
       myMarker[index].setPosition(endLocation[index].latlng);
       console.log("complete");
