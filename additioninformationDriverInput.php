@@ -7,13 +7,13 @@
 
 
 <?php  session_start();
-require('connection.php');
+require('php/connection.php');
 
 if (isset($_POST['driverslicense']) && isset($_POST['licenseplate']) && isset($_POST['carmodel']) && isset($_POST['routingnumber']) && isset($_POST['bankaccountnumber'])){
 
 
 
-$con=mysqli_connect("localhost","root","","letitridesystem");
+$con=mysqli_connect("localhost","root","password","letitridesystem");
 
 if (mysqli_connect_errno())
   {
