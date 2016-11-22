@@ -3,7 +3,7 @@
   <body>
 
 <?php  session_start();
-require('php\connection.php');
+require('php/connection.php');
 $cc = $_POST['creditcardnumber'];
 $userID = $_SESSION['UserID'];
 
