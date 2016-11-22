@@ -403,8 +403,8 @@ function checkRdyDriv() {
     success: function (result) {
     	if(result) {
     		rdyDriv = true;
-    		console.log("hello");
-    		console.log(result);
+    		//console.log("hello");
+    		//console.log(result);
     	}
     	else {
     		rdyDriv = false;
