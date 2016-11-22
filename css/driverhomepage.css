@@ -10,11 +10,11 @@
 }
 
 #name{
-  word-wrap: break-all;
-  position: absolute;
+  width: 400px;
+text-align: center;;position: absolute;
   top: 50%;
-  left: 12%;
-  max-width: 17%
+  left: 15%;
+  margin-left: -200px
 }
 
 #map {
