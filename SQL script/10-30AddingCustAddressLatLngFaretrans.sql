@@ -1,3 +1,5 @@
+Use letitridesystem;
+
 ALTER TABLE trans
 ADD custAddr varchar(70);
 
