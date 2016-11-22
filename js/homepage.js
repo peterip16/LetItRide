@@ -398,9 +398,10 @@ function checkRdyDriv() {
     async:false,
     type: "POST",
     data: {
-    blah:"blah"
+    fromLat: fromLat, fromLng: fromLng
     },
     success: function (result) {
+    	//console.log(result);
     	if(result) {
     		rdyDriv = true;
     		//console.log("hello");
