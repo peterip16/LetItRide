@@ -277,9 +277,6 @@ function foundDriver(id, name, phone, license, plate, model, time){
   // alert(time > 30);
   // alert(id + " " + name  + " " + phone + " " + license + " " + plate + " " + model  + " " + time);
   // alert(time);
-  if(time > 30){
-          displayNoDriver();
-  }else{
     // alert(id.substr(62));
     // for(i = 0; i < id.length; i++){
     //   alert(id.charAt(i) != 0);
@@ -312,7 +309,7 @@ function foundDriver(id, name, phone, license, plate, model, time){
     var popUp = $('#requestDriverScreen');
     popUp.show();
     //calculateAndDisplayRoute();
-  }
+  
 }
 
 function displayRequestDriver(){
@@ -359,23 +356,23 @@ function calculateAndDisplayRoute(){
   // else alert("Destination must be within Bay Area");
   if(serviceStatus == false)
   {
-  	checkRdyDriv();
-  	if(rdyDriv == true) {
-	    if(checkDistance()) {
-	        console.log("Service Starting");
-	        serviceStatus = true;
-	        getTrafficPath();
-	        timer = setTimeout(startService(), interval);
-	        clearPickUpLocationMarkers(); 
-	        clearDestinationMarkers();  
-	    }
-	    else {
-	      alert("Destination must be within Bay Area");
-	    }
-	}
-	else {
-		displayNoDriver();
-	}
+    checkRdyDriv();
+    if(rdyDriv == true) {
+      if(checkDistance()) {
+          console.log("Service Starting");
+          serviceStatus = true;
+          getTrafficPath();
+          timer = setTimeout(startService(), interval);
+          clearPickUpLocationMarkers(); 
+          clearDestinationMarkers();  
+      }
+      else {
+        alert("Destination must be within Bay Area");
+      }
+  }
+  else {
+    displayNoDriver();
+  }
   }
   else {
     alert("Service Started Already");
@@ -393,8 +390,8 @@ function serviceCalculateRoute()
   clearDestinationMarkers();   
 }
 function checkRdyDriv() {
-	rdyDriv = false;
-	$.ajax({
+  rdyDriv = false;
+  $.ajax({
     url: 'php/checkRdyDriv.php',
     async:false,
     type: "POST",
@@ -402,15 +399,15 @@ function checkRdyDriv() {
     fromLat: fromLat, fromLng: fromLng
     },
     success: function (result) {
-    	//console.log(result);
-    	if(result) {
-    		//console.log(result);
-    		checkRdyDrivDistance(result);
-    		//rdyDriv = true;
-    	}
-    	else {
-    		rdyDriv = false;
-    	}
+      //console.log(result);
+      if(result) {
+        //console.log(result);
+        checkRdyDrivDistance(result);
+        //rdyDriv = true;
+      }
+      else {
+        rdyDriv = false;
+      }
     },
     error: function (xhr, ajaxOptions, thrownError) {
       console.log(thrownError);
@@ -437,11 +434,11 @@ function checkRdyDrivDistance(result) {
     },
     success: function (result) {
       //console.log(JSON.parse(result));
-    	var data = JSON.parse(result);
-	//console.log(result);
-	    if((data.routes[0].legs[0].duration_in_traffic.value / 60).toFixed(0) < 30) {
-	    	rdyDriv = true;
-	    }
+      var data = JSON.parse(result);
+  //console.log(result);
+      if((data.routes[0].legs[0].duration_in_traffic.value / 60).toFixed(0) < 30) {
+        rdyDriv = true;
+      }
     },
     error: function (xhr, ajaxOptions, thrownError) {
       console.log(thrownError);
@@ -945,7 +942,7 @@ function startService() {
           serviceCalculateRoute();
           fare += Math.round(Number(distance));
           displayTimeDistance.innerHTML = "";
-  		  displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br />Duration: " + duration +" mins<br />Cost: $" + fare;
+        displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br />Duration: " + duration +" mins<br />Cost: $" + fare;
           timer =setTimeout(waitForDriver(), interval); //Begin waiting for driver
       }
       else {
