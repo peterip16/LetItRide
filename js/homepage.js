@@ -403,9 +403,9 @@ function checkRdyDriv() {
     success: function (result) {
     	//console.log(result);
     	if(result) {
-    		rdyDriv = true;
-    		//console.log("hello");
-    		//console.log(result);
+    		console.log(result);
+    		checkRdyDrivDistance(result);
+    		//rdyDriv = true;
     	}
     	else {
     		rdyDriv = false;
@@ -415,6 +415,37 @@ function checkRdyDriv() {
       console.log(thrownError);
     }
 });
+}
+
+function checkRdyDrivDistance(result) {
+  var temptoAddress = fromAddress;
+  temptoAddress = temptoAddress.replace(/,/g,"");
+  temptoAddress = temptoAddress.replace(/ /g,"+");
+
+  var tempfromAddress = result;
+  tempfromAddress = tempfromAddress.replace(/,/g,"");
+  tempfromAddress = tempfromAddress.replace(/ /g,"+");
+  var newUrl = 'https://maps.googleapis.com/maps/api/directions/json?origin='+tempfromAddress+'&destination='+temptoAddress+'&departure_time=now&mode=driving&alternatives=true&travel_model=optimistic&key=AIzaSyCprZ188mVif2fk-gao8Tv3glyWkLaM59E';
+  $.ajax({
+    url: 'php/proxy.php',
+    async:false,
+    type: "POST",
+    dataType: "json",
+    data: {
+      url:newUrl
+    },
+    success: function (result) {
+      //console.log(JSON.parse(result));
+    	var data = JSON.parse(result);
+	//console.log(result);
+	    if((data.routes[0].legs[0].duration_in_traffic.value / 60).toFixed(0) < 30) {
+	    	rdyDriv = true;
+	    }
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      console.log(thrownError);
+    }
+  });
 }
 function checkDistance() {
   var temptoAddress = toAddress;
