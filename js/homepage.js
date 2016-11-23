@@ -35,7 +35,8 @@ var poly = null;
 var startLocation = [];
 var endLocation = [];
 var timerHandle = [];
-var distance, duration;
+var distance;
+var duration;
 var emulateDriver = false;
 var pathComplete = false;
 var routeNumber = 0;
@@ -523,10 +524,11 @@ function displayDirections(data) {
     }
   } 
 
-  //var displayTimeDistance = document.getElementById("timeAndDistance");
+  //var displayTimeDistance = document.getElementById("timeAndDistance")
   distance = (data.routes[fastestIndex].legs[0].distance.value * 0.000621371).toFixed(1);
   duration = (data.routes[fastestIndex].legs[0].duration_in_traffic.value / 60).toFixed(0);
-
+  console.log(distance);
+  console.log(duration);
 
   //displayTimeDistance.innerHTML = "";
   //displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br />Duration: " + duration +" mins<br />Cost: $" + fare;
@@ -919,7 +921,7 @@ function startService() {
           timer = 0;
 
           var displayTimeDistance = document.getElementById("timeAndDistance");
-          fare = Math.round(Number(distance) + 5);
+          fare = Number(distance) + 5;
 
           //Driver information
           driverData = jQuery.parseJSON(data); 
@@ -940,9 +942,9 @@ function startService() {
           driverModel = driverData.model;
           foundDriver(driverID, driverName, driverPhone, driverLicense, driverPlate, driverModel, duration);
           serviceCalculateRoute();
-          fare += Math.round(Number(distance));
+          fare += Number(distance);
           displayTimeDistance.innerHTML = "";
-        displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br />Duration: " + duration +" mins<br />Cost: $" + fare;
+          displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br />Duration: " + duration +" mins<br />Cost: $" + fare;
           timer =setTimeout(waitForDriver(), interval); //Begin waiting for driver
       }
       else {
@@ -1009,6 +1011,9 @@ function waitForConfirmation() {
           fromAddress = myAddress;
           toAddress = destinationAddress;
           serviceCalculateRoute();
+          var displayTimeDistance = document.getElementById("timeAndDistance");
+          displayTimeDistance.innerHTML = "";
+          displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br />Duration: " + duration +" mins<br />Cost: $" + fare;
         }
       }
   });

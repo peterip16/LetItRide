@@ -261,18 +261,18 @@ function getCustomer() {
             emulateDriver = true;
             calculateAndDisplayRoute();
             console.log("Getting to customer");
+            console.log(fare);
             timer = setTimeout(getToCustomer(), interval);
-            //console.log(fare);
-            //console.log(distance);
-            fare = 5 + Number(distance);
-            //console.log(fare);
+
           }
       }
     });
 }
 
 function getToCustomer() {
-
+	            console.log(fare);
+            console.log(distance);
+            fare = 5 + Number(distance);
     //navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
     $.ajax({
       url: "php/getToCustomer.php", 
@@ -401,10 +401,11 @@ function driverConfirmedPickUp(){
 function driverConfirmedEnd(){
   //This section is for code to change status of the ride in trans table. Need to confirm what code to use first
   //console.log("Attempting to change status of ride to end");
-  
-  fare += Number(distance);
-	console.log("Calculated fare: " + fare);
+ 
  if(pathComplete == true) {
+ console.log(fare);
+ fare += Number(distance);
+ console.log("Calculated fare: " + fare);
   $.ajax({
       url: "php/driverConfirmRideEnd.php", 
       method: "post",
