@@ -116,9 +116,9 @@ function displayDirections(data) {
 
   //var displayTimeDistance = document.getElementById("timeAndDistance");
   distance = (data.routes[fastestIndex].legs[0].distance.value * 0.000621371).toFixed(1);
-  console.log(distance);
+  //console.log(distance);
   duration = (data.routes[fastestIndex].legs[0].duration_in_traffic.value / 60).toFixed(0);
-  console.log(duration);
+  //console.log(duration);
 
   //displayTimeDistance.innerHTML = "";
   //displayTimeDistance.innerHTML += "Distance: " + distance + "mi Duration: about" + duration +" minutes"
@@ -262,10 +262,10 @@ function getCustomer() {
             calculateAndDisplayRoute();
             console.log("Getting to customer");
             timer = setTimeout(getToCustomer(), interval);
-            console.log(fare);
-            console.log(distance);
+            //console.log(fare);
+            //console.log(distance);
             fare = 5 + Number(distance);
-            console.log(fare);
+            //console.log(fare);
           }
       }
     });
