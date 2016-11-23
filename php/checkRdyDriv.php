@@ -9,7 +9,10 @@ $query = "SELECT *, 3956 * 2 * ASIN(SQRT(POWER(SIN((lat - abs('$fromLat')) * pi(
 $result = mysqli_query($mysqli, $query) or die(mysql_error());
 
 if (mysqli_num_rows($result) > 0){ 
- 	echo true;
+ 	while($row = $result->fetch_assoc()) {
+ 		$driverLocation = $row["DrivLocat"];
+ 	}
+ 	echo $driverLocation;
 }
 else{
 	echo false;
