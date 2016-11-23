@@ -31,10 +31,12 @@ var poly = null;
 var startLocation = [];
 var endLocation = [];
 var timerHandle = [];
-var distance, duration;
+var distance;
+var duration;
 var pathComplete = false;
 var emulateDriver = false;
 var routeNumber = 0;
+var fare = 5;
 
 function initMap(location) {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -114,7 +116,9 @@ function displayDirections(data) {
 
   //var displayTimeDistance = document.getElementById("timeAndDistance");
   distance = (data.routes[fastestIndex].legs[0].distance.value * 0.000621371).toFixed(1);
+  console.log(distance);
   duration = (data.routes[fastestIndex].legs[0].duration_in_traffic.value / 60).toFixed(0);
+  console.log(duration);
 
   //displayTimeDistance.innerHTML = "";
   //displayTimeDistance.innerHTML += "Distance: " + distance + "mi Duration: about" + duration +" minutes"
@@ -258,20 +262,24 @@ function getCustomer() {
             calculateAndDisplayRoute();
             console.log("Getting to customer");
             timer = setTimeout(getToCustomer(), interval);
+            console.log(fare);
+            console.log(distance);
+            fare = 5 + Number(distance);
+            console.log(fare);
           }
       }
     });
 }
 
 function getToCustomer() {
-   
+
     //navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
     $.ajax({
       url: "php/getToCustomer.php", 
       method: "post",
       data: {customerID: customerID, driverLng: driverLng, driverLat: driverLat, driverAddress: driverAddress, customerLat: customerLat, customerLng : customerLng, custAddress: customerAddress},
       success: function(data) {
-		  console.log(data);
+		  //console.log(data);
           if(data != true){
             console.log("Getting to customer");
             //console.log(data);
@@ -394,7 +402,7 @@ function driverConfirmedEnd(){
   //This section is for code to change status of the ride in trans table. Need to confirm what code to use first
   //console.log("Attempting to change status of ride to end");
   
-  var fare = Math.round(5.0 + (distance));
+  fare += Number(distance);
 	console.log("Calculated fare: " + fare);
  if(pathComplete == true) {
   $.ajax({
@@ -527,7 +535,7 @@ function createMarker(latlng, label, html) {
 
 function animate(index,d) {
   //console.log("animate"+index+" "+d);
-  console.log("d: " + d + " eol[index]: " + eol[index]);
+  //console.log("d: " + d + " eol[index]: " + eol[index]);
    if (d>eol[index]) {
       myMarker[index].setPosition(endLocation[index].latlng);
       console.log("complete");
