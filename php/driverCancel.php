@@ -4,20 +4,20 @@
 
 	if (isset($_POST)) {
 		$userID = $_SESSION['UserID'];
-
 		$query = "SELECT * FROM `rdydriv` WHERE DrivID='$userID'"; 
 		$result = mysqli_query($mysqli, $query) or die(mysql_error());
-
+		//echo $query;
 		if (mysqli_num_rows($result) > 0){ 
 			//echo false;
-			$query = "DELETE FROM 'rdydriv' WHERE DrivID='$userID'";
+			$query = "DELETE FROM `rdydriv` WHERE DrivID='$userID'";
+			//echo $query;
 			$result = mysqli_query($mysqli, $query) or die(mysql_error());
 			if ($result){
 				echo true;
 			}
 		}
 		else {
-			echo true;
+			echo false;
 		}
 		
 		/* 
@@ -39,6 +39,6 @@
 		}
 		*/
 	} else {
-		echo "Things aren't set in PHP file."
+		echo "Things aren't set in PHP file.";
 	}
 	?>

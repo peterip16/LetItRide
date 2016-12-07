@@ -450,13 +450,13 @@ function driverCancel(){
   //clearInterval(timer);
   //console.log("Testing function.");
   driverAddress = "";
-  console.log("Random driver address set.");
 
   $.ajax({
       url: "php/driverCancel.php", 
       method: "post",
       data: {driverAddress: driverAddress},
       success: function(data){
+        console.log(data);
         if(data != false)
         {          
           console.log("Canceled successfully.");
