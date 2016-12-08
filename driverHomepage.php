@@ -104,6 +104,11 @@
 					-->
 
 			  </div>
+			  <div class="left_Panel" id = "fourthPanel">
+				<div class= "textLabel" id = "button6Label">
+					<button id = "search" class="customer_search button"/>Searching for customer...</button>
+				</div>
+			  </div>
 	      </div>
 	    <!--</div>-->
 	    

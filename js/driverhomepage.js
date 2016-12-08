@@ -144,8 +144,8 @@ function displayDirections(data) {
       if(response.routes[i].summary == routename)
       {
         routeNumber = i;
-    document.getElementById("firstPanel").style.display = "none";
-        $('.secondPanel').show();
+    document.getElementById("fourthPanel").style.display = "none";
+        //$('.secondPanel').show();
     document.getElementById("secondPanel").style.display = "block";
         directionsDisplay.setDirections(response);
         directionsDisplay.setRouteIndex(i);
@@ -206,6 +206,10 @@ function displayDirections(data) {
 
 function startService() {
   console.log("Trying to start service.");
+  
+  document.getElementById("firstPanel").style.display = "none";
+  document.getElementById("fourthPanel").style.display = "block";
+  
   navigator.geolocation.getCurrentPosition(setUserCurrentLocation); 
   if(serviceStatus == false) {
     serviceStatus = true;
