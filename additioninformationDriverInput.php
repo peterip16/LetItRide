@@ -17,10 +17,10 @@ $con=mysqli_connect("localhost","root","password","letitridesystem");
 
 if (mysqli_connect_errno())
   {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  //echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
   else{
-	  echo "Connection success ";
+	  //echo "Connection success ";
   }
 
 
@@ -118,10 +118,10 @@ $query = "SELECT * FROM dit WHERE Driverlicense = '$driverslicense' and Licensep
 //$query = "SELECT * FROM dit where userID = '$userID'";
 $result = mysqli_query($con, $query);
 
-echo "Query ";
+//echo "Query ";
 
  if (mysqli_num_rows($result) > 0){ 
- echo "It already exists! ";
+ //echo "It already exists! ";
     $_SESSION['error'] = "Already exists!";
     echo "<script type='text/javascript'>alert('Already Exists! Please try again.')</script>";
   header( "refresh:0; url=additionalinformationpageDriver.html" );
@@ -143,21 +143,21 @@ echo "Query ";
 
 else{
    // $query = "INSERT INTO rut VALUES (NULL, '$email', '$password', '$name', NULL)";
-    echo "qw ";
+    //echo "qw ";
     $query = "INSERT INTO dit (UserID, Driverlicense, Licenseplate, Carmodel, Routingnumber, Bankaccountnumber) VALUES ('$userID', '$driverslicense', '$licenseplate', '$carmodel', '$routingnumber', '$bankaccountnumber')";
     $result = mysqli_query($con, $query); // or die(mysql_error());
-	echo mysqli_error($con);
+	//echo mysqli_error($con);
     $_SESSION['id'] = mysqli_insert_id($con);
-	echo "The result is: $result ";
+	//echo "The result is: $result ";
     if ($result){
-		echo "Query succeed";
+		//echo "Query succeed";
       echo "<script type='text/javascript'>alert('Successfully Registered!')</script>";
   header( "refresh:0; url=driverHomepage.php" );
  
 
       }
 	  else{
-		  echo "Query failed ";
+		  //echo "Query failed ";
 	  }
     }
   }
