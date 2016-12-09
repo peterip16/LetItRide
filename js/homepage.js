@@ -892,6 +892,8 @@ function pickupLocation() {
           });
           map.fitBounds(bounds);
         }
+        $('.directionPanel').hide();
+        $('.inputPanel').show();
         });
 }
 

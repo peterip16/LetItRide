@@ -158,12 +158,6 @@ $('.profile').on('click',function(){
 	profile.show();
 });
 
-
-$('.goBack').on('click', function(){
-	$('.directionPanel').hide();
-	$('.inputPanel').show();
-});
-
 $('.home').click();
 
 
