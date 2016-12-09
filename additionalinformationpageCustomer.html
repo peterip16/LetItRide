@@ -37,7 +37,7 @@
               Credit Card Number<span class="req">*</span>
             </label>
          <!--   <input type="password"required autocomplete="off"/> !-->
-           <input type ="text" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" maxlength="16" id="user-pw" placeholder="Credit Card Number" name="creditcardnumber"/>
+           <input type ="text" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" maxlength="16" minlength ="16" id="user-pw" placeholder="Credit Card Number" name="creditcardnumber"/>
           </div>
           
            <button id ="myButton" formaction="additioninformationCustomerInput.php" class="button button-block"/>Continue</button>
