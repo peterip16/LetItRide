@@ -948,6 +948,7 @@ function startService() {
           foundDriver(driverID, driverName, driverPhone, driverLicense, driverPlate, driverModel, duration);
           serviceCalculateRoute();
           fare += Number(distance);
+          fare = fare.toFixed(2);
           displayTimeDistance.innerHTML = "";
           displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br />Duration: " + duration +" mins<br />Cost: $" + fare;
           timer =setTimeout(waitForDriver(), interval); //Begin waiting for driver
