@@ -923,6 +923,8 @@ function startService() {
           clearTimeout(timer);
           timer = 0;
           riding = true;
+          $('.home').hide();
+          $('.profile').hide();
           var displayTimeDistance = document.getElementById("timeAndDistance");
           fare = Number(distance) + 5;
 
@@ -1038,6 +1040,8 @@ function waitForDropOff() {
         else{
           $('.directionPanel').hide();
           $('.inputPanel').show();
+          $('.home').show();
+          $('.profile').show();
           riding = false;
           console.log("Destination reached");
           recentering();
