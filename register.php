@@ -45,15 +45,33 @@ if (empty($email))
   header( "refresh:0; url=login.html" );
   exit;
 }
+if (strlen($email) > 40)
+{
+   echo "<script type='text/javascript'>alert('Please enter an email less than 40 characters!')</script>";
+  header( "refresh:0; url=login.html" );
+  exit;
+}
 if (empty($password))
 {
-   echo "<script type='text/javascript'>alert('Please enter an Password!')</script>";
+   echo "<script type='text/javascript'>alert('Please enter a Password!')</script>";
+  header( "refresh:0; url=login.html" );
+  exit;
+}
+if (strlen($password) > 30)
+{
+   echo "<script type='text/javascript'>alert('Please enter a Password less than 30 characters!')</script>";
   header( "refresh:0; url=login.html" );
   exit;
 }
 if (empty($name))
 {
-   echo "<script type='text/javascript'>alert('Please enter an Name!')</script>";
+   echo "<script type='text/javascript'>alert('Please enter a Name!')</script>";
+  header( "refresh:0; url=login.html" );
+  exit;
+}
+if (strlen($name) > 255)
+{
+   echo "<script type='text/javascript'>alert('Please enter a Name less than 255 characters!')</script>";
   header( "refresh:0; url=login.html" );
   exit;
 }
