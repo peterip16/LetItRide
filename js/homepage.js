@@ -42,6 +42,7 @@ var pathComplete = false;
 var routeNumber = 0;
 var rdyDriv = false;
 var fare = 5;
+var riding = false;
 
 //MARKER FUNCTIONS//
 function clearDestinationMarkers() {
@@ -115,35 +116,37 @@ function initMap() {
   }
 
   google.maps.event.addListener(map, 'click', function(event){
-    if (!document.getElementById('selected').checked){
-      placePickUpLocationMarker(event.latLng);
-    
-      geocoder.geocode({'latLng': event.latLng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-          if (results[0]) {
-            fromAddress = results[0].formatted_address;
-            fromLng = event.latLng.lng();
-            fromLat = event.latLng.lat();
-            document.getElementById("from").placeholder = "";
-            document.getElementById("from").value = fromAddress;
+    if(riding == false){
+      if (!document.getElementById('selected').checked){
+        placePickUpLocationMarker(event.latLng);
+      
+        geocoder.geocode({'latLng': event.latLng}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0]) {
+              fromAddress = results[0].formatted_address;
+              fromLng = event.latLng.lng();
+              fromLat = event.latLng.lat();
+              document.getElementById("from").placeholder = "";
+              document.getElementById("from").value = fromAddress;
+            }
           }
-        }
-      });
-    }
-    else {
-      placeDestinationMarker(event.latLng);
-    
-      geocoder.geocode({'latLng': event.latLng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-          if (results[0]) {
-            toAddress = results[0].formatted_address;
-            toLng = event.latLng.lng();
-            toLat = event.latLng.lat();
-            document.getElementById("to").placeholder = "";
-            document.getElementById("to").value = toAddress;
+        });
+      }
+      else {
+        placeDestinationMarker(event.latLng);
+      
+        geocoder.geocode({'latLng': event.latLng}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0]) {
+              toAddress = results[0].formatted_address;
+              toLng = event.latLng.lng();
+              toLat = event.latLng.lat();
+              document.getElementById("to").placeholder = "";
+              document.getElementById("to").value = toAddress;
+            }
           }
-        }
-      });
+        });
+      }
     }   
   });
 
@@ -892,8 +895,6 @@ function pickupLocation() {
           });
           map.fitBounds(bounds);
         }
-        $('.directionPanel').hide();
-        $('.inputPanel').show();
         });
 }
 
@@ -921,7 +922,7 @@ function startService() {
         console.log("Driver Found");
           clearTimeout(timer);
           timer = 0;
-
+          riding = true;
           var displayTimeDistance = document.getElementById("timeAndDistance");
           fare = Number(distance) + 5;
 
@@ -948,6 +949,7 @@ function startService() {
           displayTimeDistance.innerHTML = "";
           displayTimeDistance.innerHTML += "Distance: " + distance + "mi<br />Duration: " + duration +" mins<br />Cost: $" + fare;
           timer =setTimeout(waitForDriver(), interval); //Begin waiting for driver
+          
       }
       else {
         clearTimeout(timer);
@@ -1036,6 +1038,7 @@ function waitForDropOff() {
         else{
           $('.directionPanel').hide();
           $('.inputPanel').show();
+          riding = false;
           console.log("Destination reached");
           recentering();
           directionsDisplay.setMap(null);

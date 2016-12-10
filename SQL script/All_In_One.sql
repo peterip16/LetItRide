@@ -1,3 +1,4 @@
+drop database if exists letitridesystem;
 create database letitridesystem;
 
 use letitridesystem;
