@@ -7,7 +7,7 @@
 
 
 <?php  session_start();
-require('php\connection.php');
+require('php/connection.php');
 
 if (isset($_POST['email']) and isset($_POST['password'])){
 
